@@ -1,0 +1,72 @@
+﻿node.exe : npm notice run calcora-website@0.1.0 npx
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\Kushi\AppData\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm notice run calcora-website@0.1.0 npx:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm notice run next build
+Γû▓ Next.js 16.3.4 (Turbopack)
+Γ£ô Running next.config.ts took 34ms
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 615ms
+  Running TypeScript ...
+  Finished TypeScript in 2.4s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/31) ...
+Γ¿» useSearchParams() should be wrapped in a suspense boundary at page "/emi-calculator". Read more: 
+https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+    at Object.X (C:\calcora-website\.next\server\chunks\ssr\_090yvt-._.js:2:3038)
+    at q (C:\calcora-website\.next\server\chunks\ssr\_090yvt-._.js:1:9742)
+    at C:\calcora-website\.next\server\chunks\ssr\_090yvt-._.js:129:1278
+    at al (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:85944)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:87760)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109623)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at aS (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:114685)
+    at ap (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:111684)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109897)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:100962)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109623)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at au (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86296)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:87805)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109623)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at au (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86296)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:87805)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106280)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109623)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at aS (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:114685)
+    at ap (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:111684)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109897)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:100962)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109623)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109858)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:105898)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109623)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at au (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86296)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:87805)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109623)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at aS (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:114685)
+    at ap (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:111684)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109897)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:87724)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109623)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+    at au (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86296)
+    at ac (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:87805)
+    at ah (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109623)
+    at af (C:\calcora-website\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:106940)
+Error occurred prerendering page "/emi-calculator". Read more: https://nextjs.org/docs/messages/prerender-error
+Export encountered an error on /emi-calculator/page: /emi-calculator, exiting the build.
+Γ¿» Next.js build worker exited with code: 1 and signal: null

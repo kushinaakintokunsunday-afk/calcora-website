@@ -1,0 +1,58 @@
+﻿node.exe : npm notice run calcora-website@0.1.0 npx
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\Kushi\AppData\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm notice run calcora-website@0.1.0 npx:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm notice run next build
+Γû▓ Next.js 16.3.4 (Turbopack)
+Γ£ô Running next.config.ts took 39ms
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 1377ms
+  Running TypeScript ...
+  Finished TypeScript in 3.8s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/31) ...
+  Generating static pages using 7 workers (7/31) 
+  Generating static pages using 7 workers (15/31) 
+  Generating static pages using 7 workers (23/31) 
+Γ£ô Generating static pages using 7 workers (31/31) in 746ms
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /about
+Γö£ ╞Æ /ads.txt
+Γö£ Γùï /blog
+Γö£ Γùï /blog/15-vs-30-year-mortgage
+Γö£ Γùï /blog/avalanche-vs-snowball
+Γö£ Γùï /blog/calculate-compound-interest
+Γö£ Γùï /blog/debt-to-income-ratio
+Γö£ Γùï /blog/inflation-erodes-savings
+Γö£ Γùï /blog/salary-to-rent-ratio
+Γö£ Γùï /bmi-calculator
+Γö£ Γùï /calorie-calculator
+Γö£ Γùï /compound-interest-calculator
+Γö£ Γùï /contact
+Γö£ Γùï /debt-payoff-calculator
+Γö£ Γùï /disclaimer
+Γö£ Γùï /emi-calculator
+Γö£ Γùï /inflation-calculator
+Γö£ Γùï /loan-affordability-calculator
+Γö£ Γùï /mortgage-calculator
+Γö£ Γùï /paycheck-calculator
+Γö£ Γùï /percentage-calculator
+Γö£ Γùï /privacy-policy
+Γö£ Γùï /retirement-calculator
+Γö£ Γùï /robots.txt
+Γö£ Γùï /sitemap.xml
+Γö£ Γùï /terms
+Γöö Γùï /vat-calculator
+
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+
