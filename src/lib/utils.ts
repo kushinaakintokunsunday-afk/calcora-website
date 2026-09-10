@@ -1,5 +1,7 @@
-export function formatCurrency(value: number, currency: string = "USD"): string {
-  return new Intl.NumberFormat("en-US", {
+import { getCountry, type CountryCode } from "./countries";
+
+export function formatCurrency(value: number, currency: string = "USD", locale: string = "en-US"): string {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
     minimumFractionDigits: 0,
@@ -7,8 +9,28 @@ export function formatCurrency(value: number, currency: string = "USD"): string 
   }).format(value);
 }
 
+export function formatCurrencyForCountry(
+  value: number,
+  countryCode: string | CountryCode = "US"
+): string {
+  const country = getCountry(countryCode);
+  return formatCurrency(value, country.currencyCode, country.locale);
+}
+
 export function formatNumber(value: number, decimals: number = 2): string {
   return new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(value);
+}
+
+export function formatNumberForCountry(
+  value: number,
+  countryCode: string | CountryCode = "US",
+  decimals: number = 2
+): string {
+  const country = getCountry(countryCode);
+  return new Intl.NumberFormat(country.locale, {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   }).format(value);

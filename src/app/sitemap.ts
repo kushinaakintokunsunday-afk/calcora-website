@@ -1,21 +1,7 @@
 import type { MetadataRoute } from "next";
+import { CALCULATORS } from "@/lib/registry";
 
 const BASE_URL = "https://calcora.website";
-
-const CALCULATORS = [
-  { slug: "mortgage-calculator", lastModified: new Date() },
-  { slug: "emi-calculator", lastModified: new Date() },
-  { slug: "compound-interest-calculator", lastModified: new Date() },
-  { slug: "inflation-calculator", lastModified: new Date() },
-  { slug: "bmi-calculator", lastModified: new Date() },
-  { slug: "calorie-calculator", lastModified: new Date() },
-  { slug: "paycheck-calculator", lastModified: new Date() },
-  { slug: "loan-affordability-calculator", lastModified: new Date() },
-  { slug: "debt-payoff-calculator", lastModified: new Date() },
-  { slug: "percentage-calculator", lastModified: new Date() },
-  { slug: "retirement-calculator", lastModified: new Date() },
-  { slug: "vat-calculator", lastModified: new Date() },
-];
 
 const PAGES = [
   { path: "/about/", lastModified: new Date() },
@@ -37,8 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const calcEntries: MetadataRoute.Sitemap = CALCULATORS.map((calc) => ({
-    url: `${BASE_URL}/${calc.slug}/`,
-    lastModified: calc.lastModified,
+    url: `${BASE_URL}${calc.path}`,
+    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.9,
   }));

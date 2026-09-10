@@ -1,19 +1,10 @@
 import Link from "next/link";
+import { CALCULATORS } from "@/lib/registry";
 
-const FOOTER_TOOLS = [
-  { href: "/mortgage-calculator/", label: "Mortgage Calculator" },
-  { href: "/emi-calculator/", label: "EMI Calculator" },
-  { href: "/compound-interest-calculator/", label: "Compound Interest Calculator" },
-  { href: "/inflation-calculator/", label: "Inflation Calculator" },
-  { href: "/bmi-calculator/", label: "BMI Calculator" },
-  { href: "/calorie-calculator/", label: "Calorie Calculator" },
-  { href: "/paycheck-calculator/", label: "Paycheck Calculator" },
-  { href: "/loan-affordability-calculator/", label: "Loan Affordability Calculator" },
-  { href: "/debt-payoff-calculator/", label: "Debt Payoff Calculator" },
-  { href: "/percentage-calculator/", label: "Percentage Calculator" },
-  { href: "/retirement-calculator/", label: "Retirement Calculator" },
-  { href: "/vat-calculator/", label: "VAT Calculator" },
-];
+const FOOTER_TOOLS = CALCULATORS.map((calc) => ({
+  href: calc.path,
+  label: calc.title,
+}));
 
 const FOOTER_PAGES = [
   { href: "/about/", label: "About" },
