@@ -8,20 +8,20 @@ import {
 } from "@/lib/registry";
 
 describe("calculator registry", () => {
-  it("has 18 calculators", () => {
-    expect(CALCULATORS).toHaveLength(18);
+  it("has 24 calculators", () => {
+    expect(CALCULATORS).toHaveLength(24);
   });
 
   it("every slug and path is unique", () => {
     const slugs = CALCULATORS.map((c) => c.slug);
     const paths = CALCULATORS.map((c) => c.path);
-    expect(new Set(slugs).size).toBe(18);
-    expect(new Set(paths).size).toBe(18);
+    expect(new Set(slugs).size).toBe(24);
+    expect(new Set(paths).size).toBe(24);
   });
 
   it("every calculator has valid paths and meta title/description", () => {
     for (const calc of CALCULATORS) {
-      expect(calc.path).toMatch(/^\/[a-z-]+\/$/);
+      expect(calc.path).toMatch(/^\/[a-z0-9-]+\/$/);
       expect(calc.title.length).toBeGreaterThan(0);
       expect(calc.h1.length).toBeGreaterThan(0);
       expect(calc.description.length).toBeGreaterThan(0);

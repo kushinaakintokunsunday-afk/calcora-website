@@ -297,6 +297,102 @@ export const CALCULATORS: CalculatorMeta[] = [
       "how to calculate simple interest",
     ],
   },
+  {
+    slug: "dti-ratio-calculator",
+    path: "/dti-ratio-calculator/",
+    title: "Debt-to-Income (DTI) Ratio Calculator",
+    h1: "Debt-to-Income (DTI) Ratio Calculator",
+    description:
+      "Calculate your debt-to-income ratio and see whether your monthly debt load is within healthy lending limits.",
+    category: "finance",
+    countryScope: "global",
+    related: ["loan-affordability-calculator", "mortgage-calculator", "debt-payoff-calculator"],
+    keywords: [
+      "debt to income ratio calculator",
+      "dti calculator mortgage",
+      "what is a good debt to income ratio",
+    ],
+  },
+  {
+    slug: "savings-goal-calculator",
+    path: "/savings-goal-calculator/",
+    title: "Savings Goal Calculator",
+    h1: "Savings Goal Calculator",
+    description:
+      "Find out how long it takes to reach a savings goal with monthly contributions and interest, or how much to save each month.",
+    category: "finance",
+    countryScope: "global",
+    related: ["compound-interest-calculator", "compound-savings-calculator", "retirement-calculator"],
+    keywords: [
+      "savings goal calculator",
+      "how long to save 10000 with monthly contributions",
+      "how much should i save each month calculator",
+    ],
+  },
+  {
+    slug: "cagr-calculator",
+    path: "/cagr-calculator/",
+    title: "CAGR Calculator",
+    h1: "Compound Annual Growth Rate (CAGR) Calculator",
+    description:
+      "Calculate the compound annual growth rate of an investment from its start and end values over any period.",
+    category: "investment",
+    countryScope: "global",
+    related: ["compound-interest-calculator", "apy-calculator", "rule-of-72-calculator", "retirement-calculator"],
+    keywords: [
+      "cagr calculator",
+      "compound annual growth rate formula",
+      "investment growth rate calculator",
+    ],
+  },
+  {
+    slug: "compound-savings-calculator",
+    path: "/compound-savings-calculator/",
+    title: "Compound Savings Calculator",
+    h1: "Compound Savings Calculator",
+    description:
+      "Project how your savings grow when you add money monthly and earn compounding interest, year after year.",
+    category: "investment",
+    countryScope: "global",
+    related: ["compound-interest-calculator", "savings-goal-calculator", "retirement-calculator"],
+    keywords: [
+      "compound savings calculator",
+      "monthly contribution compound interest",
+      "how much will my savings grow",
+    ],
+  },
+  {
+    slug: "loan-comparison-calculator",
+    path: "/loan-comparison-calculator/",
+    title: "Loan Comparison Calculator",
+    h1: "Loan Comparison Calculator",
+    description:
+      "Compare two loan offers side by side: monthly payments, total interest, fees, and total cost over the life of each loan.",
+    category: "finance",
+    countryScope: "global",
+    related: ["loan-affordability-calculator", "mortgage-calculator", "auto-loan-calculator", "personal-loan-calculator"],
+    keywords: [
+      "compare loans calculator",
+      "which loan is better monthly payment or total cost",
+      "loan comparison monthly interest",
+    ],
+  },
+  {
+    slug: "rule-of-72-calculator",
+    path: "/rule-of-72-calculator/",
+    title: "Rule of 72 Calculator",
+    h1: "Rule of 72 Calculator",
+    description:
+      "Estimate how long it takes your money to double with the Rule of 72, or what return you need to double by a target date.",
+    category: "investment",
+    countryScope: "global",
+    related: ["cagr-calculator", "compound-interest-calculator", "apy-calculator"],
+    keywords: [
+      "rule of 72 calculator",
+      "how long to double my money",
+      "what rate to double money in 10 years",
+    ],
+  },
 ];
 
 export function getCalculatorBySlug(slug: string): CalculatorMeta | undefined {

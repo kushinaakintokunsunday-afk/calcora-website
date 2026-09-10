@@ -95,6 +95,37 @@ export const CALCULATOR_ICONS: Record<string, ReactNode> = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6L9 12.75l4.286-4.286a11.948 11.948 0 014.306 6.43l.776 2.898m0 0l3.182-5.511m-3.182 5.51l-5.511-3.181" />
     </svg>
   ),
+  "dti-ratio-calculator": (
+    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+    </svg>
+  ),
+  "savings-goal-calculator": (
+    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25V9m-3.75 1.5A1.5 1.5 0 014.5 12v6a1.5 1.5 0 001.5 1.5h1.5a1.5 1.5 0 001.5-1.5v-6a1.5 1.5 0 00-1.5-1.5h-1.5zM15 7.5h4.5A1.5 1.5 0 0121 9v9a1.5 1.5 0 01-1.5 1.5h-3" />
+    </svg>
+  ),
+  "cagr-calculator": (
+    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.286 4.286a11.948 11.948 0 005.306-4.142l-3.92 3.856M15.75 8.25h4.5v4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  "compound-savings-calculator": (
+    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6v12a.75.75 0 01-.75.75H3.75A.75.75 0 013 21V9z" />
+    </svg>
+  ),
+  "loan-comparison-calculator": (
+    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h9.75M6 16.5h9.75m-9.75 0a2.25 2.25 0 01-2.25 2.25H6M18 16.5V6.75A2.25 2.25 0 0015.75 4.5H6m12 0h3.75v11.25a2.25 2.25 0 01-2.25 2.25H20.25" />
+    </svg>
+  ),
+  "rule-of-72-calculator": (
+    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
 };
 
 function getIcon(slug: string): ReactNode {
