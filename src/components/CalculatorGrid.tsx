@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { CALCULATORS } from "@/lib/registry";
-import type { CalculatorMeta } from "@/lib/registry";
+import type { CalculatorMeta, CalculatorCategory } from "@/lib/registry";
 
 export const CALCULATOR_ICONS: Record<string, ReactNode> = {
   "mortgage-calculator": (
@@ -162,17 +162,77 @@ function getIcon(slug: string): ReactNode {
   return CALCULATOR_ICONS[slug] ?? null;
 }
 
+const CATEGORY_STYLES: Record<
+  CalculatorCategory,
+  { label: string; tile: string; chip: string }
+> = {
+  mortgage: {
+    label: "Loans & Mortgage",
+    tile: "from-blue-600 to-indigo-600",
+    chip: "bg-blue-50 text-blue-700 border-blue-100",
+  },
+  finance: {
+    label: "Personal Finance",
+    tile: "from-emerald-500 to-teal-600",
+    chip: "bg-emerald-50 text-emerald-700 border-emerald-100",
+  },
+  investment: {
+    label: "Investing",
+    tile: "from-violet-500 to-purple-600",
+    chip: "bg-violet-50 text-violet-700 border-violet-100",
+  },
+  tax: {
+    label: "Taxes",
+    tile: "from-amber-500 to-orange-600",
+    chip: "bg-amber-50 text-amber-700 border-amber-100",
+  },
+  health: {
+    label: "Health & Fitness",
+    tile: "from-rose-500 to-pink-600",
+    chip: "bg-rose-50 text-rose-700 border-rose-100",
+  },
+  utility: {
+    label: "Everyday Tools",
+    tile: "from-sky-500 to-blue-600",
+    chip: "bg-sky-50 text-sky-700 border-sky-100",
+  },
+};
+
 export function CalculatorCard({ calc }: { calc: CalculatorMeta }) {
+  const style = CATEGORY_STYLES[calc.category];
   return (
     <Link
       href={calc.path}
-      className="group block rounded-xl border border-border bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-green/40 hover:-translate-y-0.5"
+      className="group relative flex flex-col rounded-2xl border border-border bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-green/40 [content-visibility:auto] [contain-intrinsic-size:auto_190px]"
     >
-      <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-lg bg-surface text-navy group-hover:bg-green group-hover:text-white transition-colors">
-        {getIcon(calc.slug)}
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <div
+          className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${style.tile} text-white shadow-sm transition-transform group-hover:scale-105`}
+        >
+          {getIcon(calc.slug)}
+        </div>
+        <span
+          className={`shrink-0 rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${style.chip}`}
+        >
+          {style.label}
+        </span>
       </div>
       <h3 className="text-lg font-semibold text-navy mb-1">{calc.title}</h3>
-      <p className="text-sm text-text-secondary leading-relaxed">{calc.description}</p>
+      <p className="text-sm text-text-secondary leading-relaxed mb-4">
+        {calc.description}
+      </p>
+      <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-green">
+        Open calculator
+        <svg
+          className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </span>
     </Link>
   );
 }
