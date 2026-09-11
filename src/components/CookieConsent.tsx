@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { initAnalyticsIfConsented, trackPageView } from "@/lib/analytics";
 
 export function CookieConsent() {
   const [show, setShow] = useState(false);
@@ -18,6 +19,8 @@ export function CookieConsent() {
   const handleAccept = () => {
     localStorage.setItem("calcora_cookie_consent", "accepted");
     setShow(false);
+    initAnalyticsIfConsented();
+    trackPageView(window.location.pathname);
   };
 
   const handleDecline = () => {

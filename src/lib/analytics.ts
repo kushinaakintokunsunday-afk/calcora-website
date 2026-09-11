@@ -4,6 +4,10 @@ declare global {
   }
 }
 
+export const GA4_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID ?? "";
+
+let analyticsInitialized = false;
+
 type GTMParams = { event: string } & Record<string, unknown>;
 
 function push(data: GTMParams) {
@@ -98,4 +102,27 @@ export function initAnalytics(measurementId: string) {
     gtag?.("config", measurementId);
   };
   document.head.appendChild(script);
+}
+
+export function initAnalyticsIfConsented() {
+  if (typeof window === "undefined") return;
+  if (analyticsInitialized) return;
+  if (!GA4_MEASUREMENT_ID) return;
+  const consent = localStorage.getItem("calcora_cookie_consent");
+  if (consent !== "accepted") return;
+  analyticsInitialized = true;
+  initAnalytics(GA4_MEASUREMENT_ID);
+}
+
+export function trackPageView(pagePath: string) {
+  if (typeof window === "undefined") return;
+  if (!GA4_MEASUREMENT_ID) return;
+  const gtag = (window as unknown as { gtag?: unknown }).gtag as
+    | ((...args: unknown[]) => void)
+    | undefined;
+  gtag?.("event", "page_view", {
+    page_path: pagePath,
+    page_location: window.location.href,
+    page_title: document.title,
+  });
 }
