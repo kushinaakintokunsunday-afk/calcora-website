@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ADSENSE_CLIENT, numericSlotFor } from "@/lib/ads";
 
 interface AdSlotProps {
   slotId: string;
@@ -9,9 +10,26 @@ interface AdSlotProps {
   sticky?: boolean;
 }
 
+function hasConsent(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.localStorage.getItem("calcora_cookie_consent") === "accepted";
+  } catch {
+    return false;
+  }
+}
+
 export function AdSlot({ slotId, label = "Advertisement", className = "", sticky = false }: AdSlotProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [consent, setConsent] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => {
+      setConsent(hasConsent());
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -31,6 +49,31 @@ export function AdSlot({ slotId, label = "Advertisement", className = "", sticky
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!isVisible || consent !== true) return;
+    if (document.querySelector("script[data-calcora-adsense]")) return;
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`;
+    script.setAttribute("data-calcora-adsense", "1");
+    document.head.appendChild(script);
+  }, [isVisible, consent]);
+
+  useEffect(() => {
+    if (!isVisible || consent !== true) return;
+    if (!numericSlotFor(slotId)) return;
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch {
+      // ignore ad render errors
+    }
+  }, [isVisible, consent, slotId]);
+
+  const numeric = numericSlotFor(slotId);
+  const showAd = isVisible && consent === true && numeric != null;
+
   return (
     <div
       ref={ref}
@@ -43,24 +86,25 @@ export function AdSlot({ slotId, label = "Advertisement", className = "", sticky
         </p>
       )}
       <div className="rounded-lg border border-border bg-surface flex items-center justify-center min-h-[250px] text-text-muted text-sm">
-        {isVisible ? (
-          <span>Ad placeholder — {slotId}</span>
+        {showAd ? (
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block", minHeight: 250 }}
+            data-ad-client={ADSENSE_CLIENT}
+            data-ad-slot={numeric}
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
         ) : (
-          <span>Loading...</span>
+          <span>
+            {isVisible
+              ? numeric
+                ? "Advertisement"
+                : `Ad unit not configured — ${slotId}`
+              : "Loading..."}
+          </span>
         )}
       </div>
-    </div>
-  );
-}
-
-export function AffiliateSpot({ children }: { children?: ReactNode }) {
-  return (
-    <div className="rounded-xl border-2 border-dashed border-green/30 bg-green/5 p-6 text-center">
-      {children ?? (
-        <p className="text-sm text-text-muted">
-          Compare offers from our trusted partners — coming soon.
-        </p>
-      )}
     </div>
   );
 }

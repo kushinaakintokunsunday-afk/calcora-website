@@ -45,6 +45,8 @@ describe("affiliates", () => {
       expect(() => new URL(offer.href)).not.toThrow();
       expect(offer.id.length).toBeGreaterThan(0);
       expect(offer.name.length).toBeGreaterThan(0);
+      expect(offer.href).not.toContain("YOUR_REF");
+      expect(offer.href).toContain("yourfreetool-20");
     }
   });
 });

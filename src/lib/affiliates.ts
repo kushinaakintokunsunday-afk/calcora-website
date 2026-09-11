@@ -1,4 +1,4 @@
-import { getCalculatorBySlug } from "@/lib/registry";
+﻿import { getCalculatorBySlug } from "@/lib/registry";
 
 export interface AffiliateOffer {
   id: string;
@@ -19,7 +19,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "Lending Tree",
     name: "Compare Loan Offers",
     tagline: "Pre-qualify with multiple lenders in minutes using a soft credit check.",
-    href: "https://www.example-affiliate.com/compare-loans?ref=YOUR_REF&topic=loans",
+    href: "https://www.example-affiliate.com/compare-loans?ref=yourfreetool-20&topic=loans",
     keywords: ["loan", "rate", "apr", "debt", "credit", "refinance", "lender", "approval"],
   },
   {
@@ -27,7 +27,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "SoFi",
     name: "Personal Loans",
     tagline: "Fixed-rate loans with no origination fees and flexible terms.",
-    href: "https://www.example-affiliate.com/sofi?ref=YOUR_REF&topic=personal-loan",
+    href: "https://www.example-affiliate.com/sofi?ref=yourfreetool-20&topic=personal-loan",
     keywords: ["loan", "personal", "apr", "debt", "credit", "payment"],
   },
   {
@@ -35,7 +35,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "Wealthfront",
     name: "Automated Investing",
     tagline: "Low-fee robo advisor that builds a diversified portfolio for you.",
-    href: "https://www.example-affiliate.com/wealthfront?ref=YOUR_REF&topic=investing",
+    href: "https://www.example-affiliate.com/wealthfront?ref=yourfreetool-20&topic=investing",
     categories: ["investment"],
     keywords: ["invest", "retirement", "compound", "interest", "portfolio", "stock", "bond", "cagr"],
   },
@@ -44,7 +44,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "Fidelity",
     name: "Open a Brokerage",
     tagline: "Trade stocks, ETFs and mutual funds with zero commission.",
-    href: "https://www.example-affiliate.com/fidelity?ref=YOUR_REF&topic=brokerage",
+    href: "https://www.example-affiliate.com/fidelity?ref=yourfreetool-20&topic=brokerage",
     categories: ["investment"],
     keywords: ["401k", "retirement", "stock", "etf", "save", "saving", "invest"],
   },
@@ -53,7 +53,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "Ally Bank",
     name: "High-Yield Savings",
     tagline: "Competitive APY with no monthly maintenance fees.",
-    href: "https://www.example-affiliate.com/ally?ref=YOUR_REF&topic=savings",
+    href: "https://www.example-affiliate.com/ally?ref=yourfreetool-20&topic=savings",
     keywords: ["apy", "cd", "savings", "interest", "yield", "compound", "emergency", "goal"],
   },
   {
@@ -61,7 +61,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "Marcus by Goldman Sachs",
     name: "Competitive CD Rates",
     tagline: "Lock in a rate with flexible certificate of deposit terms.",
-    href: "https://www.example-affiliate.com/marcus?ref=YOUR_REF&topic=cd",
+    href: "https://www.example-affiliate.com/marcus?ref=yourfreetool-20&topic=cd",
     slugs: ["cd-calculator", "apy-calculator"],
     keywords: ["cd", "apy", "yield", "rate", "interest"],
   },
@@ -70,7 +70,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "Better",
     name: "Compare Mortgage Rates",
     tagline: "Talk to a licensed loan officer. Rates and fees disclosed upfront.",
-    href: "https://www.example-affiliate.com/better?ref=YOUR_REF&topic=mortgage",
+    href: "https://www.example-affiliate.com/better?ref=yourfreetool-20&topic=mortgage",
     categories: ["mortgage"],
     keywords: ["mortgage", "rate", "apr", "refinance", "home", "house", "biweekly", "affordability", "payment"],
   },
@@ -79,7 +79,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "Rocket Mortgage",
     name: "Refinance Offers",
     tagline: "See if refinancing lowers your monthly mortgage payment.",
-    href: "https://www.example-affiliate.com/rocket?ref=YOUR_REF&topic=refinance",
+    href: "https://www.example-affiliate.com/rocket?ref=yourfreetool-20&topic=refinance",
     categories: ["mortgage"],
     keywords: ["refinance", "mortgage", "rate", "payment", "interest"],
   },
@@ -88,7 +88,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "TaxJar",
     name: "Sales Tax and VAT Filing",
     tagline: "Automate sales tax and VAT compliance for your business.",
-    href: "https://www.example-affiliate.com/taxjar?ref=YOUR_REF&topic=vat",
+    href: "https://www.example-affiliate.com/taxjar?ref=yourfreetool-20&topic=vat",
     keywords: ["vat", "tax", "sales tax", "gst"],
   },
   {
@@ -96,7 +96,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "TurboTax",
     name: "Tax Filing Software",
     tagline: "File accurately with step-by-step guidance for deductions and credits.",
-    href: "https://www.example-affiliate.com/turbotax?ref=YOUR_REF&topic=taxes",
+    href: "https://www.example-affiliate.com/turbotax?ref=yourfreetool-20&topic=taxes",
     categories: ["tax"],
     keywords: ["tax", "deduction", "credit", "bracket", "wage", "paycheck", "salary", "federal"],
   },
@@ -105,7 +105,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "Policygenius",
     name: "Personal Insurance",
     tagline: "Compare quotes for auto, home and life insurance from top carriers.",
-    href: "https://www.example-affiliate.com/policygenius?ref=YOUR_REF&topic=insurance",
+    href: "https://www.example-affiliate.com/policygenius?ref=yourfreetool-20&topic=insurance",
     keywords: ["life", "insurance", "protect", "risk", "net worth", "family"],
   },
   {
@@ -113,7 +113,7 @@ export const AFFILIATES: AffiliateOffer[] = [
     network: "Aetna",
     name: "Health Plan Quotes",
     tagline: "Compare individual and family health insurance plans in your area.",
-    href: "https://www.example-affiliate.com/aetna?ref=YOUR_REF&topic=health",
+    href: "https://www.example-affiliate.com/aetna?ref=yourfreetool-20&topic=health",
     categories: ["health"],
     keywords: ["health", "bmi", "calorie", "diet"],
   },
