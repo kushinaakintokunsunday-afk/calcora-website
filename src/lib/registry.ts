@@ -393,6 +393,102 @@ export const CALCULATORS: CalculatorMeta[] = [
       "what rate to double money in 10 years",
     ],
   },
+  {
+    slug: "net-worth-calculator",
+    path: "/net-worth-calculator/",
+    title: "Net Worth Calculator",
+    h1: "Net Worth Calculator",
+    description:
+      "Add up your assets, subtract your debts, and track exactly where your money stands today.",
+    category: "finance",
+    countryScope: "global",
+    related: ["debt-payoff-calculator", "savings-goal-calculator", "retirement-calculator"],
+    keywords: [
+      "net worth calculator",
+      "how to calculate net worth",
+      "assets minus liabilities calculator",
+    ],
+  },
+  {
+    slug: "emergency-fund-calculator",
+    path: "/emergency-fund-calculator/",
+    title: "Emergency Fund Calculator",
+    h1: "Emergency Fund Calculator",
+    description:
+      "Find out how much to keep in your emergency fund and how long it takes to build it with your monthly savings.",
+    category: "finance",
+    countryScope: "global",
+    related: ["savings-goal-calculator", "net-worth-calculator", "debt-payoff-calculator"],
+    keywords: [
+      "emergency fund calculator",
+      "how much should i save for emergencies",
+      "emergency savings how many months expenses",
+    ],
+  },
+  {
+    slug: "biweekly-mortgage-calculator",
+    path: "/biweekly-mortgage-calculator/",
+    title: "Biweekly Mortgage Calculator",
+    h1: "Biweekly Mortgage Calculator",
+    description:
+      "See how a biweekly payment schedule shrinks your mortgage term and saves thousands in interest.",
+    category: "mortgage",
+    countryScope: ["US", "UK", "CA", "AU"],
+    related: ["mortgage-calculator", "amortization-calculator", "loan-affordability-calculator"],
+    keywords: [
+      "biweekly mortgage calculator",
+      "biweekly vs monthly mortgage payments",
+      "can biweekly payments save mortgage interest",
+    ],
+  },
+  {
+    slug: "401k-calculator",
+    path: "/401k-calculator/",
+    title: "401(k) Calculator",
+    h1: "401(k) Retirement Calculator",
+    description:
+      "Project your 401(k) balance by age, including employee contributions and employer match, with compound growth.",
+    category: "investment",
+    countryScope: ["US"],
+    related: ["retirement-calculator", "compound-savings-calculator", "compound-interest-calculator"],
+    keywords: [
+      "401k calculator with employer match",
+      "how much will my 401k be worth",
+      "retirement 401k projection",
+    ],
+  },
+  {
+    slug: "hourly-wage-calculator",
+    path: "/hourly-wage-calculator/",
+    title: "Hourly Wage Calculator",
+    h1: "Hourly to Annual Salary Calculator",
+    description:
+      "Convert your hourly rate into annual, monthly, biweekly, and weekly pay based on hours worked per week.",
+    category: "finance",
+    countryScope: "global",
+    related: ["paycheck-calculator", "percentage-calculator", "retirement-calculator"],
+    keywords: [
+      "hourly to annual salary calculator",
+      "how much is my hourly rate worth",
+      "hourly wage to monthly salary",
+    ],
+  },
+  {
+    slug: "tax-bracket-calculator",
+    path: "/tax-bracket-calculator/",
+    title: "Tax Bracket Calculator",
+    h1: "US Tax Bracket Calculator",
+    description:
+      "See which federal tax bracket you fall into — and exactly how much you owe — using the latest IRS brackets.",
+    category: "tax",
+    countryScope: ["US"],
+    related: ["paycheck-calculator", "percentage-calculator", "dti-ratio-calculator"],
+    keywords: [
+      "federal tax bracket calculator",
+      "what tax bracket am i in 2025",
+      "marginal tax bracket vs effective tax rate",
+    ],
+  },
 ];
 
 export function getCalculatorBySlug(slug: string): CalculatorMeta | undefined {

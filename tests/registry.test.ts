@@ -8,15 +8,15 @@ import {
 } from "@/lib/registry";
 
 describe("calculator registry", () => {
-  it("has 24 calculators", () => {
-    expect(CALCULATORS).toHaveLength(24);
+  it("has 30 calculators", () => {
+    expect(CALCULATORS).toHaveLength(30);
   });
 
   it("every slug and path is unique", () => {
     const slugs = CALCULATORS.map((c) => c.slug);
     const paths = CALCULATORS.map((c) => c.path);
-    expect(new Set(slugs).size).toBe(24);
-    expect(new Set(paths).size).toBe(24);
+    expect(new Set(slugs).size).toBe(30);
+    expect(new Set(paths).size).toBe(30);
   });
 
   it("every calculator has valid paths and meta title/description", () => {
