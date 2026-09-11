@@ -2,6 +2,15 @@ import type { CountryCode } from "./countries";
 
 export type CalculatorCategory = "mortgage" | "finance" | "investment" | "tax" | "health" | "utility";
 
+export const CATEGORY_LABELS: Record<CalculatorCategory, string> = {
+  mortgage: "Loans & Mortgage",
+  finance: "Personal Finance",
+  investment: "Investing",
+  tax: "Taxes",
+  health: "Health & Fitness",
+  utility: "Everyday Tools",
+};
+
 export interface CalculatorMeta {
   slug: string;
   path: string;

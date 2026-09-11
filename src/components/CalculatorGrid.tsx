@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { CALCULATORS } from "@/lib/registry";
+import { CALCULATORS, CATEGORY_LABELS } from "@/lib/registry";
 import type { CalculatorMeta, CalculatorCategory } from "@/lib/registry";
 
 export const CALCULATOR_ICONS: Record<string, ReactNode> = {
@@ -194,35 +194,29 @@ function getIcon(slug: string): ReactNode {
 
 const CATEGORY_STYLES: Record<
   CalculatorCategory,
-  { label: string; tile: string; chip: string }
+  { tile: string; chip: string }
 > = {
   mortgage: {
-    label: "Loans & Mortgage",
     tile: "from-blue-600 to-indigo-600",
     chip: "bg-blue-50 text-blue-700 border-blue-100",
   },
   finance: {
-    label: "Personal Finance",
     tile: "from-emerald-500 to-teal-600",
     chip: "bg-emerald-50 text-emerald-700 border-emerald-100",
   },
   investment: {
-    label: "Investing",
     tile: "from-violet-500 to-purple-600",
     chip: "bg-violet-50 text-violet-700 border-violet-100",
   },
   tax: {
-    label: "Taxes",
     tile: "from-amber-500 to-orange-600",
     chip: "bg-amber-50 text-amber-700 border-amber-100",
   },
   health: {
-    label: "Health & Fitness",
     tile: "from-rose-500 to-pink-600",
     chip: "bg-rose-50 text-rose-700 border-rose-100",
   },
   utility: {
-    label: "Everyday Tools",
     tile: "from-sky-500 to-blue-600",
     chip: "bg-sky-50 text-sky-700 border-sky-100",
   },
@@ -244,7 +238,7 @@ export function CalculatorCard({ calc }: { calc: CalculatorMeta }) {
         <span
           className={`shrink-0 rounded-full border px-2.5 py-0.5 text-[11px] font-medium ${style.chip}`}
         >
-          {style.label}
+          {CATEGORY_LABELS[calc.category]}
         </span>
       </div>
       <h3 className="text-lg font-semibold text-navy mb-1">{calc.title}</h3>
