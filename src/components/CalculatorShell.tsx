@@ -2,6 +2,8 @@
 
 import { Suspense, useCallback, type ReactNode } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ContextualAffiliate } from "@/components/ContextualAffiliate";
 
 export interface CalculatorShellProps {
   title: string;
@@ -40,6 +42,9 @@ function ShellContent({
     const url = `${window.location.origin}${window.location.pathname}${window.location.search}`;
     navigator.clipboard.writeText(url).catch(() => {});
   }, []);
+
+  const pathname = usePathname();
+  const slug = pathname.split("/").filter(Boolean)[0] ?? "";
 
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -145,6 +150,8 @@ function ShellContent({
           </div>
         </section>
       )}
+
+      {slug && <ContextualAffiliate slug={slug} />}
     </div>
   );
 }

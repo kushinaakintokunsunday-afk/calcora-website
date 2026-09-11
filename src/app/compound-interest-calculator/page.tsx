@@ -5,6 +5,7 @@ import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
 import { formatNumber, downloadCSV } from "@/lib/utils";
 import { useMoney } from "@/lib/useCountry";
+import { AdSlot } from "@/components/AdSlot";
 
 const FREQUENCIES = [
   { label: "Daily", value: 365 },
@@ -184,6 +185,8 @@ export default function CompoundInterestCalculator() {
             </div>
           </div>
         </div>
+
+        <AdSlot slotId="compound-interest-mid" className="my-8" />
 
         {results.yearlyGrowth.length > 0 && (
           <div>
