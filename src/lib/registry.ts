@@ -18,6 +18,7 @@ export interface CalculatorMeta {
   h1: string;
   description: string;
   category: CalculatorCategory;
+  subcategory: string;
   countryScope: "global" | CountryCode[];
   related: string[];
   keywords: string[];
@@ -32,6 +33,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Calculate your monthly mortgage payments, total interest, and view a full amortization schedule.",
     category: "mortgage",
+    subcategory: "Home Loans",
     countryScope: ["US", "UK", "CA", "AU"],
     related: ["emi-calculator", "loan-affordability-calculator", "debt-payoff-calculator"],
     keywords: [
@@ -49,6 +51,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Compute equated monthly installments for any loan with a detailed amortization breakdown.",
     category: "finance",
+    subcategory: "Loans & EMI",
     countryScope: "global",
     related: ["mortgage-calculator", "loan-affordability-calculator", "debt-payoff-calculator"],
     keywords: [
@@ -65,6 +68,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "See how your money grows over time with compound interest. View year-by-year breakdowns.",
     category: "investment",
+    subcategory: "Compound Growth",
     countryScope: "global",
     related: ["retirement-calculator", "inflation-calculator", "loan-affordability-calculator"],
     keywords: [
@@ -81,6 +85,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Find out what your money will be worth in the future or what past amounts equal today.",
     category: "investment",
+    subcategory: "Purchasing Power",
     countryScope: "global",
     related: ["compound-interest-calculator", "retirement-calculator", "percentage-calculator"],
     keywords: [
@@ -96,6 +101,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "BMI Calculator",
     description: "Calculate your Body Mass Index using metric or imperial units. Know your category instantly.",
     category: "health",
+    subcategory: "Body & Nutrition",
     countryScope: "global",
     related: ["calorie-calculator", "percentage-calculator"],
     keywords: [
@@ -112,6 +118,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Find your daily calorie needs based on the Mifflin-St Jeor equation. Get targets for weight loss or gain.",
     category: "health",
+    subcategory: "Body & Nutrition",
     countryScope: "global",
     related: ["bmi-calculator", "percentage-calculator"],
     keywords: [
@@ -127,6 +134,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "Paycheck Calculator",
     description: "Estimate your take-home pay after federal tax, state tax, and other deductions.",
     category: "tax",
+    subcategory: "Income Tax",
     countryScope: ["US", "UK", "CA", "AU"],
     related: ["loan-affordability-calculator", "retirement-calculator", "percentage-calculator"],
     keywords: [
@@ -142,6 +150,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "Loan Affordability Calculator",
     description: "Find out how much you can borrow based on your monthly budget and interest rate.",
     category: "finance",
+    subcategory: "Loans & EMI",
     countryScope: "global",
     related: ["mortgage-calculator", "emi-calculator", "debt-payoff-calculator"],
     keywords: [
@@ -157,6 +166,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "Debt Payoff Calculator",
     description: "Compare avalanche vs snowball strategies and see how fast you can become debt-free.",
     category: "finance",
+    subcategory: "Debt Payoff",
     countryScope: "global",
     related: ["loan-affordability-calculator", "percentage-calculator", "emi-calculator"],
     keywords: [
@@ -172,6 +182,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "Percentage Calculator",
     description: "Calculate percentages, percentage changes, and convert between fractions and percentages.",
     category: "utility",
+    subcategory: "Math",
     countryScope: "global",
     related: ["compound-interest-calculator", "inflation-calculator", "debt-payoff-calculator"],
     keywords: [
@@ -184,9 +195,10 @@ export const CALCULATORS: CalculatorMeta[] = [
     slug: "retirement-calculator",
     path: "/retirement-calculator/",
     title: "Retirement Calculator",
-    h1: "Retirement / 401(k) Calculator",
+    h1: "Retirement Calculator",
     description: "Project your retirement savings and see how contributions grow over decades.",
     category: "investment",
+    subcategory: "Retirement",
     countryScope: "global",
     related: ["compound-interest-calculator", "inflation-calculator", "paycheck-calculator"],
     keywords: [
@@ -202,6 +214,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "VAT / Sales Tax Calculator",
     description: "Add or remove VAT from any price. Supports UK, EU, and custom tax rates.",
     category: "tax",
+    subcategory: "Sales & VAT",
     countryScope: ["UK", "CA", "AU"],
     related: ["percentage-calculator", "paycheck-calculator", "loan-affordability-calculator"],
     keywords: [
@@ -218,6 +231,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Calculate the maturity value and interest earned on a certificate of deposit with monthly or annual compounding.",
     category: "investment",
+    subcategory: "Compound Growth",
     countryScope: ["US"],
     related: ["compound-interest-calculator", "apy-calculator", "retirement-calculator"],
     keywords: [
@@ -234,6 +248,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Convert APR to APY, see how compounding frequency boosts your effective annual yield, and compare earnings.",
     category: "investment",
+    subcategory: "Compound Growth",
     countryScope: "global",
     related: ["cd-calculator", "compound-interest-calculator", "simple-interest-calculator"],
     keywords: [
@@ -250,6 +265,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Estimate monthly car payments, total interest, and see a full amortization schedule for your auto loan.",
     category: "finance",
+    subcategory: "Loans & EMI",
     countryScope: "global",
     related: ["emi-calculator", "loan-affordability-calculator", "personal-loan-calculator"],
     keywords: [
@@ -266,6 +282,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Calculate monthly payments, total interest, and a payoff schedule for any personal loan.",
     category: "finance",
+    subcategory: "Loans & EMI",
     countryScope: "global",
     related: ["emi-calculator", "debt-payoff-calculator", "loan-affordability-calculator"],
     keywords: [
@@ -282,6 +299,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Generate a complete loan amortization schedule showing every principal and interest payment over the life of the loan.",
     category: "finance",
+    subcategory: "Loans & EMI",
     countryScope: "global",
     related: ["mortgage-calculator", "emi-calculator", "auto-loan-calculator"],
     keywords: [
@@ -298,6 +316,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Calculate simple interest on any loan or investment with clear principal, rate, and time inputs.",
     category: "finance",
+    subcategory: "Loans & EMI",
     countryScope: "global",
     related: ["compound-interest-calculator", "apy-calculator", "percentage-calculator"],
     keywords: [
@@ -314,6 +333,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Calculate your debt-to-income ratio and see whether your monthly debt load is within healthy lending limits.",
     category: "finance",
+    subcategory: "Debt Payoff",
     countryScope: "global",
     related: ["loan-affordability-calculator", "mortgage-calculator", "debt-payoff-calculator"],
     keywords: [
@@ -330,6 +350,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Find out how long it takes to reach a savings goal with monthly contributions and interest, or how much to save each month.",
     category: "finance",
+    subcategory: "Savings & Net Worth",
     countryScope: "global",
     related: ["compound-interest-calculator", "compound-savings-calculator", "retirement-calculator"],
     keywords: [
@@ -346,6 +367,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Calculate the compound annual growth rate of an investment from its start and end values over any period.",
     category: "investment",
+    subcategory: "Growth Metrics",
     countryScope: "global",
     related: ["compound-interest-calculator", "apy-calculator", "rule-of-72-calculator", "retirement-calculator"],
     keywords: [
@@ -362,6 +384,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Project how your savings grow when you add money monthly and earn compounding interest, year after year.",
     category: "investment",
+    subcategory: "Compound Growth",
     countryScope: "global",
     related: ["compound-interest-calculator", "savings-goal-calculator", "retirement-calculator"],
     keywords: [
@@ -378,6 +401,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Compare two loan offers side by side: monthly payments, total interest, fees, and total cost over the life of each loan.",
     category: "finance",
+    subcategory: "Loans & EMI",
     countryScope: "global",
     related: ["loan-affordability-calculator", "mortgage-calculator", "auto-loan-calculator", "personal-loan-calculator"],
     keywords: [
@@ -394,6 +418,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Estimate how long it takes your money to double with the Rule of 72, or what return you need to double by a target date.",
     category: "investment",
+    subcategory: "Growth Metrics",
     countryScope: "global",
     related: ["cagr-calculator", "compound-interest-calculator", "apy-calculator"],
     keywords: [
@@ -410,6 +435,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Add up your assets, subtract your debts, and track exactly where your money stands today.",
     category: "finance",
+    subcategory: "Savings & Net Worth",
     countryScope: "global",
     related: ["debt-payoff-calculator", "savings-goal-calculator", "retirement-calculator"],
     keywords: [
@@ -426,6 +452,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Find out how much to keep in your emergency fund and how long it takes to build it with your monthly savings.",
     category: "finance",
+    subcategory: "Savings & Net Worth",
     countryScope: "global",
     related: ["savings-goal-calculator", "net-worth-calculator", "debt-payoff-calculator"],
     keywords: [
@@ -442,6 +469,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "See how a biweekly payment schedule shrinks your mortgage term and saves thousands in interest.",
     category: "mortgage",
+    subcategory: "Home Loans",
     countryScope: ["US", "UK", "CA", "AU"],
     related: ["mortgage-calculator", "amortization-calculator", "loan-affordability-calculator"],
     keywords: [
@@ -458,6 +486,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Project your 401(k) balance by age, including employee contributions and employer match, with compound growth.",
     category: "investment",
+    subcategory: "Retirement",
     countryScope: ["US"],
     related: ["retirement-calculator", "compound-savings-calculator", "compound-interest-calculator"],
     keywords: [
@@ -474,6 +503,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "Convert your hourly rate into annual, monthly, biweekly, and weekly pay based on hours worked per week.",
     category: "finance",
+    subcategory: "Salary & Income",
     countryScope: "global",
     related: ["paycheck-calculator", "percentage-calculator", "retirement-calculator"],
     keywords: [
@@ -490,6 +520,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     description:
       "See which federal tax bracket you fall into — and exactly how much you owe — using the latest IRS brackets.",
     category: "tax",
+    subcategory: "Income Tax",
     countryScope: ["US"],
     related: ["paycheck-calculator", "percentage-calculator", "dti-ratio-calculator"],
     keywords: [
@@ -505,6 +536,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "Student Loan Calculator",
     description: "Estimate your federal or private student loan monthly payment, total interest, and see a full payoff schedule.",
     category: "finance",
+    subcategory: "Loans & EMI",
     countryScope: ["US"],
     related: ["loan-affordability-calculator", "debt-payoff-calculator", "personal-loan-calculator", "simple-interest-calculator"],
     keywords: [
@@ -522,6 +554,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "Car Affordability Calculator",
     description: "Find the maximum car price you can afford based on your monthly budget, down payment, and loan term.",
     category: "finance",
+    subcategory: "Loans & EMI",
     countryScope: "global",
     related: ["auto-loan-calculator", "loan-affordability-calculator", "personal-loan-calculator", "loan-comparison-calculator"],
     keywords: [
@@ -539,6 +572,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "Credit Card Payoff Calculator",
     description: "See how long it takes to pay off your credit card balance and how much interest you will pay.",
     category: "finance",
+    subcategory: "Debt Payoff",
     countryScope: "global",
     related: ["debt-payoff-calculator", "personal-loan-calculator", "loan-comparison-calculator", "compound-interest-calculator"],
     keywords: [
@@ -556,6 +590,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "ROI Calculator",
     description: "Calculate your return on investment (ROI) and annualized rate for any stock, property, or other investment.",
     category: "investment",
+    subcategory: "Growth Metrics",
     countryScope: "global",
     related: ["cagr-calculator", "compound-interest-calculator", "rule-of-72-calculator", "net-worth-calculator"],
     keywords: [
@@ -573,6 +608,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "Mortgage Refinance Calculator",
     description: "Compare your current mortgage to a new refinance offer and find the break-even point on closing costs.",
     category: "mortgage",
+    subcategory: "Home Loans",
     countryScope: ["US", "UK", "CA", "AU"],
     related: ["mortgage-calculator", "biweekly-mortgage-calculator", "loan-comparison-calculator", "amortization-calculator"],
     keywords: [
@@ -590,6 +626,7 @@ export const CALCULATORS: CalculatorMeta[] = [
     h1: "Sales Tax Calculator",
     description: "Add or remove sales tax from any price instantly with our free sales tax calculator.",
     category: "tax",
+    subcategory: "Sales & VAT",
     countryScope: "global",
     related: ["vat-calculator", "percentage-calculator", "paycheck-calculator", "inflation-calculator"],
     keywords: [

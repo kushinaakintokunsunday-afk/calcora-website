@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function NumberInput({
   value,
@@ -26,11 +26,15 @@ export function NumberInput({
   suffix?: string;
 }) {
   const [raw, setRaw] = useState(String(value));
+  const rafRef = useRef(0);
 
   useEffect(() => {
-    if (document.activeElement?.id !== id) {
-      setRaw(String(value));
-    }
+    rafRef.current = window.requestAnimationFrame(() => {
+      if (document.activeElement?.id !== id) {
+        setRaw(String(value));
+      }
+    });
+    return () => window.cancelAnimationFrame(rafRef.current);
   }, [value, id]);
 
   return (
