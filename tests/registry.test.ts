@@ -9,15 +9,15 @@ import {
 } from "@/lib/registry";
 
 describe("calculator registry", () => {
-  it("has 30 calculators", () => {
-    expect(CALCULATORS).toHaveLength(30);
+  it("has 36 calculators", () => {
+    expect(CALCULATORS).toHaveLength(36);
   });
 
   it("every slug and path is unique", () => {
     const slugs = CALCULATORS.map((c) => c.slug);
     const paths = CALCULATORS.map((c) => c.path);
-    expect(new Set(slugs).size).toBe(30);
-    expect(new Set(paths).size).toBe(30);
+    expect(new Set(slugs).size).toBe(36);
+    expect(new Set(paths).size).toBe(36);
   });
 
   it("every calculator has valid paths and meta title/description", () => {
