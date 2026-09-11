@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { CALCULATORS } from "@/lib/registry";
+import { BLOG_POSTS } from "@/lib/blog";
 
 const BASE_URL = "https://calcora.website";
 
@@ -29,6 +30,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
+  const blogEntries: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}/`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   const pageEntries: MetadataRoute.Sitemap = PAGES.map((page) => ({
     url: `${BASE_URL}${page.path}`,
     lastModified: page.lastModified,
@@ -36,5 +44,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...homeEntry, ...calcEntries, ...pageEntries];
+  return [...homeEntry, ...calcEntries, ...blogEntries, ...pageEntries];
 }

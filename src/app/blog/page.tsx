@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbListSchema } from "@/components/Schema";
+import { BLOG_POSTS } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -13,68 +14,7 @@ const breadcrumbs = [
   { name: "Blog", url: "https://calcora.website/blog" },
 ];
 
-const posts = [
-  {
-    title: "How to Calculate Compound Interest (With Examples)",
-    slug: "calculate-compound-interest",
-    excerpt:
-      "Learn the compound interest formula, see worked examples with different rates and frequencies, and discover how to maximize your returns.",
-    date: "2026-01-15",
-    readTime: "6 min read",
-    tool: "/compound-interest-calculator/",
-    toolLabel: "Compound Interest Calculator",
-  },
-  {
-    title: "15-Year vs 30-Year Mortgage: The Real Math",
-    slug: "15-vs-30-year-mortgage",
-    excerpt:
-      "A side-by-side comparison of 15-year and 30-year mortgages with real numbers so you can decide which term is right for you.",
-    date: "2026-01-22",
-    readTime: "5 min read",
-    tool: "/mortgage-calculator/",
-    toolLabel: "Mortgage Calculator",
-  },
-  {
-    title: "How Much of My Salary Should Go to Rent?",
-    slug: "salary-to-rent-ratio",
-    excerpt:
-      "The 30% rule, why it may not apply to your situation, and how to calculate a rent budget that actually works for you.",
-    date: "2026-02-01",
-    readTime: "5 min read",
-    tool: "/paycheck-calculator/",
-    toolLabel: "Paycheck Calculator",
-  },
-  {
-    title: "Avalanche vs Snowball: Which Debt Payoff Method Saves More?",
-    slug: "avalanche-vs-snowball",
-    excerpt:
-      "Two popular strategies for paying off debt, compared head-to-head with real numbers. See which saves more in interest.",
-    date: "2026-02-10",
-    readTime: "7 min read",
-    tool: "/debt-payoff-calculator/",
-    toolLabel: "Debt Payoff Calculator",
-  },
-  {
-    title: "What Is a Good Debt-to-Income Ratio?",
-    slug: "debt-to-income-ratio",
-    excerpt:
-      "How lenders evaluate your DTI, what ranges mean for your loan approval chances, and steps to improve your ratio.",
-    date: "2026-02-18",
-    readTime: "5 min read",
-    tool: "/loan-affordability-calculator/",
-    toolLabel: "Loan Affordability Calculator",
-  },
-  {
-    title: "How Inflation Erodes Your Savings (and What to Do)",
-    slug: "inflation-erodes-savings",
-    excerpt:
-      "See how inflation quietly reduces your purchasing power over time and learn strategies to protect and grow your money.",
-    date: "2026-03-01",
-    readTime: "6 min read",
-    tool: "/inflation-calculator/",
-    toolLabel: "Inflation Calculator",
-  },
-];
+const posts = BLOG_POSTS;
 
 export default function BlogPage() {
   return (
