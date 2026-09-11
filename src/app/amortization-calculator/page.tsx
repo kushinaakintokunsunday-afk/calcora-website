@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, downloadCSV } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -60,6 +61,7 @@ interface YearRow {
 const MAX_DISPLAY_ROWS = 360;
 
 export default function AmortizationCalculator() {
+  const { money } = useMoney("amortization-calculator");
   const [loanAmount, setLoanAmount] = useState(300000);
   const [annualRate, setAnnualRate] = useState(6.5);
   const [termYears, setTermYears] = useState(30);
@@ -242,9 +244,9 @@ export default function AmortizationCalculator() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <ResultCard label="Monthly Payment" value={formatCurrency(results.adjustedMonthly)} accent="navy" sub={extraPayment > 0 ? `Base: ${formatCurrency(results.baseMonthly)}` : undefined} />
-          <ResultCard label="Total Interest" value={formatCurrency(results.totalInterest)} accent="green" />
-          <ResultCard label="Total Paid" value={formatCurrency(results.totalPaid)} sub={`${Math.ceil(results.monthsToPayOff / 12)} years, ${results.monthsToPayOff % 12} months`} />
+          <ResultCard label="Monthly Payment" value={money(results.adjustedMonthly)} accent="navy" sub={extraPayment > 0 ? `Base: ${money(results.baseMonthly)}` : undefined} />
+          <ResultCard label="Total Interest" value={money(results.totalInterest)} accent="green" />
+          <ResultCard label="Total Paid" value={money(results.totalPaid)} sub={`${Math.ceil(results.monthsToPayOff / 12)} years, ${results.monthsToPayOff % 12} months`} />
           {extraPayment > 0 && (
             <>
               <ResultCard label="Months Saved" value={`${results.monthsSaved}`} accent="navy" sub={`${Math.floor(results.monthsSaved / 12)} years, ${results.monthsSaved % 12} months`} />
@@ -255,8 +257,8 @@ export default function AmortizationCalculator() {
         {extraPayment > 0 && results.interestSaved > 0 && (
           <div className="rounded-lg bg-green/5 border border-green/20 p-4 mb-6">
             <p className="text-sm text-text-secondary">
-              Paying an extra <strong>{formatCurrency(extraPayment)}/month</strong> saves you{" "}
-              <strong className="text-green">{formatCurrency(results.interestSaved)}</strong> in interest and{" "}
+              Paying an extra <strong>{money(extraPayment)}/month</strong> saves you{" "}
+              <strong className="text-green">{money(results.interestSaved)}</strong> in interest and{" "}
               <strong className="text-navy">{results.monthsSaved} months</strong> off your loan.
             </p>
           </div>
@@ -296,10 +298,10 @@ export default function AmortizationCalculator() {
                   {results.monthlyDisplay.map((row) => (
                     <tr key={row.month} className="border-b border-border last:border-0 hover:bg-surface/50">
                       <td className="px-4 py-2.5 text-text-primary">{row.month}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.payment)}</td>
-                      <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.principal)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-secondary">{formatCurrency(row.interest)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.balance)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.payment)}</td>
+                      <td className="px-4 py-2.5 text-right text-green">{money(row.principal)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-secondary">{money(row.interest)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.balance)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -325,9 +327,9 @@ export default function AmortizationCalculator() {
                   {results.yearlyDisplay.map((row) => (
                     <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                       <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                      <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.principalPaid)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-secondary">{formatCurrency(row.interestPaid)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.balance)}</td>
+                      <td className="px-4 py-2.5 text-right text-green">{money(row.principalPaid)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-secondary">{money(row.interestPaid)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.balance)}</td>
                     </tr>
                   ))}
                 </tbody>

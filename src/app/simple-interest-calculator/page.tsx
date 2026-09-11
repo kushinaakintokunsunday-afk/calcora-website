@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, downloadCSV } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -48,6 +49,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function SimpleInterestCalculator() {
+  const { money } = useMoney("simple-interest-calculator");
   const [principal, setPrincipal] = useState(10000);
   const [rate, setRate] = useState(5);
   const [years, setYears] = useState(3);
@@ -135,9 +137,9 @@ export default function SimpleInterestCalculator() {
         <div className="rounded-lg bg-surface border border-border p-6 mb-6">
           <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">Results</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <ResultCard label="Interest Amount" value={formatCurrency(results.interest)} accent="green" />
-            <ResultCard label="Total Amount (Principal + Interest)" value={formatCurrency(results.total)} accent="navy" />
-            <ResultCard label="Annual Interest" value={formatCurrency(results.annualInterest)} sub="per year" />
+            <ResultCard label="Interest Amount" value={money(results.interest)} accent="green" />
+            <ResultCard label="Total Amount (Principal + Interest)" value={money(results.total)} accent="navy" />
+            <ResultCard label="Annual Interest" value={money(results.annualInterest)} sub="per year" />
           </div>
         </div>
 
@@ -167,8 +169,8 @@ export default function SimpleInterestCalculator() {
                 {results.yearlyTable.map((row) => (
                   <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.annualInterest)}</td>
-                    <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.cumulative)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.annualInterest)}</td>
+                    <td className="px-4 py-2.5 text-right text-green">{money(row.cumulative)}</td>
                   </tr>
                 ))}
               </tbody>

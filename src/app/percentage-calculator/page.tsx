@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
 
 type Tab = "of" | "what-percent" | "change" | "add-subtract";
@@ -46,6 +47,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function PercentageCalculator() {
+  const { money } = useMoney("percentage-calculator");
   const [tab, setTab] = useState<Tab>("of");
 
   const [pctOfValue, setPctOfValue] = useState(15);
@@ -151,7 +153,7 @@ export default function PercentageCalculator() {
             </div>
             <div className="sm:col-span-2 rounded-lg bg-surface border border-border p-4">
               <p className="text-sm text-text-secondary">Result</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(ofResult)}</p>
+              <p className="text-2xl font-bold text-navy">{money(ofResult)}</p>
             </div>
           </div>
         )}
@@ -282,7 +284,7 @@ export default function PercentageCalculator() {
               <p className="text-sm text-text-secondary">
                 {addSubOp === "add" ? "Value + Percentage" : "Value - Percentage"}
               </p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(addSubResult)}</p>
+              <p className="text-2xl font-bold text-navy">{money(addSubResult)}</p>
             </div>
           </div>
         )}

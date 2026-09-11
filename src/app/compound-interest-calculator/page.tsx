@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 
 const FREQUENCIES = [
   { label: "Daily", value: 365 },
@@ -47,6 +48,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function CompoundInterestCalculator() {
+  const { money } = useMoney("compound-interest-calculator");
   const [principal, setPrincipal] = useState(10000);
   const [rate, setRate] = useState(7);
   const [years, setYears] = useState(10);
@@ -170,11 +172,11 @@ export default function CompoundInterestCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <p className="text-sm text-text-secondary">Final Amount</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(results.finalAmount)}</p>
+              <p className="text-2xl font-bold text-navy">{money(results.finalAmount)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Interest Earned</p>
-              <p className="text-2xl font-bold text-green">{formatCurrency(results.totalInterest)}</p>
+              <p className="text-2xl font-bold text-green">{money(results.totalInterest)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Growth Multiple</p>
@@ -208,8 +210,8 @@ export default function CompoundInterestCalculator() {
                   {results.yearlyGrowth.map((row) => (
                     <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                       <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.amount)}</td>
-                      <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.interest)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.amount)}</td>
+                      <td className="px-4 py-2.5 text-right text-green">{money(row.interest)}</td>
                     </tr>
                   ))}
                 </tbody>

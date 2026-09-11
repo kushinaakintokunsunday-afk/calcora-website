@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { SearchBox } from "@/components/SearchBox";
+import { CountrySelector } from "@/components/CountrySelector";
 
 const NAV_ITEMS = [
   { href: "/mortgage-calculator/", label: "Mortgage" },
@@ -18,7 +20,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-navy text-white shadow-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center gap-3">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-green text-white text-sm font-bold">
               C
@@ -26,7 +28,7 @@ export function Header() {
             Calcora
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
@@ -38,9 +40,17 @@ export function Header() {
             ))}
           </nav>
 
+          <div className="hidden md:block flex-1 max-w-sm ml-auto">
+            <SearchBox />
+          </div>
+
+          <div className="hidden md:block">
+            <CountrySelector />
+          </div>
+
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-white/80 hover:text-white hover:bg-white/10"
+            className="md:hidden ml-auto inline-flex items-center justify-center rounded-md p-2 text-white/80 hover:text-white hover:bg-white/10"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
             aria-label="Toggle navigation menu"
@@ -59,17 +69,25 @@ export function Header() {
       </div>
 
       {mobileOpen && (
-        <nav className="md:hidden border-t border-white/10 bg-navy-dark px-4 py-3">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="block py-2 text-sm font-medium text-white/80 hover:text-white"
-              onClick={() => setMobileOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav className="md:hidden border-t border-white/10 bg-navy-dark px-4 py-3 space-y-4">
+          <div className="max-w-sm">
+            <SearchBox />
+          </div>
+          <div>
+            <CountrySelector />
+          </div>
+          <div className="pt-1 border-t border-white/10">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block py-2 text-sm font-medium text-white/80 hover:text-white"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </nav>
       )}
     </header>

@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, downloadCSV } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -58,6 +59,7 @@ interface YearRow {
 }
 
 export default function AutoLoanCalculator() {
+  const { money } = useMoney("auto-loan-calculator");
   const [vehiclePrice, setVehiclePrice] = useState(35000);
   const [downPayment, setDownPayment] = useState(5000);
   const [annualRate, setAnnualRate] = useState(6.5);
@@ -248,10 +250,10 @@ export default function AutoLoanCalculator() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <ResultCard label="Monthly Payment" value={formatCurrency(results.monthlyPayment)} accent="navy" />
-          <ResultCard label="Total Interest" value={formatCurrency(results.totalInterest)} accent="green" />
-          <ResultCard label="Total Cost" value={formatCurrency(results.totalCost)} sub="Includes down payment, trade-in, and tax" />
-          <ResultCard label="Loan Amount" value={formatCurrency(results.loanAmount)} sub={results.taxOnPrice > 0 ? `Includes ${formatCurrency(results.taxOnPrice)} in sales tax` : undefined} />
+          <ResultCard label="Monthly Payment" value={money(results.monthlyPayment)} accent="navy" />
+          <ResultCard label="Total Interest" value={money(results.totalInterest)} accent="green" />
+          <ResultCard label="Total Cost" value={money(results.totalCost)} sub="Includes down payment, trade-in, and tax" />
+          <ResultCard label="Loan Amount" value={money(results.loanAmount)} sub={results.taxOnPrice > 0 ? `Includes ${money(results.taxOnPrice)} in sales tax` : undefined} />
         </div>
 
         <AdSlot slotId="auto-loan-mid" className="my-8" />
@@ -282,9 +284,9 @@ export default function AutoLoanCalculator() {
                   {results.yearlySchedule.map((row) => (
                     <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                       <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                      <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.principalPaid)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-secondary">{formatCurrency(row.interestPaid)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.balance)}</td>
+                      <td className="px-4 py-2.5 text-right text-green">{money(row.principalPaid)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-secondary">{money(row.interestPaid)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.balance)}</td>
                     </tr>
                   ))}
                 </tbody>

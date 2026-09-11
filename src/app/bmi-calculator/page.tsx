@@ -9,6 +9,7 @@ import {
   WebApplicationSchema,
 } from "@/components/Schema";
 import { formatNumber } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 
 type Unit = "metric" | "imperial";
 
@@ -81,6 +82,8 @@ const inputClass =
   "w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-green/50";
 
 export default function BmiCalculatorPage() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { money: _money } = useMoney("bmi-calculator");
   const [unit, setUnit] = useState<Unit>("metric");
   const [metricWeight, setMetricWeight] = useState(70);
   const [metricHeight, setMetricHeight] = useState(170);

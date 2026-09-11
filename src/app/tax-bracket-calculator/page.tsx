@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { SelectInput } from "@/components/ui/SelectInput";
 import { ResultCard } from "@/components/ui/Field";
@@ -103,6 +104,7 @@ interface BracketRow {
 }
 
 export default function TaxBracketCalculator() {
+  const { money } = useMoney("tax-bracket-calculator");
   const [filingStatus, setFilingStatus] = useState("single");
   const [income, setIncome] = useState(80000);
 
@@ -208,9 +210,9 @@ export default function TaxBracketCalculator() {
           <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">Results</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <ResultCard label="Marginal Tax Bracket" value={`${results.marginalRate}%`} accent="navy" />
-            <ResultCard label="Total Federal Tax" value={formatCurrency(results.totalTax)} />
+            <ResultCard label="Total Federal Tax" value={money(results.totalTax)} />
             <ResultCard label="Effective Tax Rate" value={`${formatNumber(results.effectiveRate, 2)}%`} accent="green" />
-            <ResultCard label="Take-Home Approximation" value={formatCurrency(results.takeHome)} />
+            <ResultCard label="Take-Home Approximation" value={money(results.takeHome)} />
           </div>
         </div>
 
@@ -241,11 +243,11 @@ export default function TaxBracketCalculator() {
                 {results.table.map((row) => (
                   <tr key={row.lower} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-primary">
-                      {formatCurrency(row.lower)} — {row.upper === Infinity ? "∞" : formatCurrency(row.upper)}
+                      {money(row.lower)} — {row.upper === Infinity ? "∞" : money(row.upper)}
                     </td>
                     <td className="px-4 py-2.5 text-right text-text-primary">{row.rate}%</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.taxInBracket)}</td>
-                    <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.cumulative)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.taxInBracket)}</td>
+                    <td className="px-4 py-2.5 text-right text-green">{money(row.cumulative)}</td>
                   </tr>
                 ))}
               </tbody>

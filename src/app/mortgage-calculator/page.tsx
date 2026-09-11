@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, downloadCSV } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
 
 const TERMS = [15, 20, 30];
@@ -51,6 +52,7 @@ interface AmortizationRow {
 }
 
 export default function MortgageCalculator() {
+  const { money } = useMoney("mortgage-calculator");
   const [homePrice, setHomePrice] = useState(300000);
   const [downPaymentPct, setDownPaymentPct] = useState(20);
   const [interestRate, setInterestRate] = useState(6.5);
@@ -275,19 +277,19 @@ export default function MortgageCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
               <p className="text-sm text-text-secondary">Monthly P&I</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(results.monthlyPI)}</p>
+              <p className="text-2xl font-bold text-navy">{money(results.monthlyPI)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Monthly (PITI)</p>
-              <p className="text-2xl font-bold text-green">{formatCurrency(results.totalPITI)}</p>
+              <p className="text-2xl font-bold text-green">{money(results.totalPITI)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Interest</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(results.totalInterest)}</p>
+              <p className="text-2xl font-bold text-navy">{money(results.totalInterest)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Cost</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(results.totalCost)}</p>
+              <p className="text-2xl font-bold text-navy">{money(results.totalCost)}</p>
             </div>
           </div>
         </div>
@@ -321,10 +323,10 @@ export default function MortgageCalculator() {
                   {results.amortization.map((row) => (
                     <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                       <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.startingBalance)}</td>
-                      <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.principalPaid)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-secondary">{formatCurrency(row.interestPaid)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.endingBalance)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.startingBalance)}</td>
+                      <td className="px-4 py-2.5 text-right text-green">{money(row.principalPaid)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-secondary">{money(row.interestPaid)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.endingBalance)}</td>
                     </tr>
                   ))}
                 </tbody>

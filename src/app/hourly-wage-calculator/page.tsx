@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, downloadCSV } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -53,6 +54,7 @@ interface BreakdownRow {
 }
 
 export default function HourlyWageCalculator() {
+  const { money } = useMoney("hourly-wage-calculator");
   const [hourlyRate, setHourlyRate] = useState(20);
   const [hoursPerWeek, setHoursPerWeek] = useState(40);
   const [paidWeeks, setPaidWeeks] = useState(52);
@@ -144,10 +146,10 @@ export default function HourlyWageCalculator() {
         <div className="rounded-lg bg-surface border border-border p-6 mb-6">
           <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">Results</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ResultCard label="Annual Salary" value={formatCurrency(results.annual)} accent="navy" />
-            <ResultCard label="Monthly Pay" value={formatCurrency(results.monthly)} />
-            <ResultCard label="Biweekly Pay" value={formatCurrency(results.biweekly)} />
-            <ResultCard label="Weekly Pay" value={formatCurrency(results.weekly)} accent="green" />
+            <ResultCard label="Annual Salary" value={money(results.annual)} accent="navy" />
+            <ResultCard label="Monthly Pay" value={money(results.monthly)} />
+            <ResultCard label="Biweekly Pay" value={money(results.biweekly)} />
+            <ResultCard label="Weekly Pay" value={money(results.weekly)} accent="green" />
           </div>
         </div>
 
@@ -180,7 +182,7 @@ export default function HourlyWageCalculator() {
                 {results.breakdown.map((row) => (
                   <tr key={row.period} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-primary">{row.period}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.amount)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.amount)}</td>
                   </tr>
                 ))}
               </tbody>

@@ -9,6 +9,7 @@ import {
   WebApplicationSchema,
 } from "@/components/Schema";
 import { formatNumber } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 
 type Sex = "male" | "female";
 
@@ -69,6 +70,8 @@ const inputClass =
   "w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-green/50";
 
 export default function CalorieCalculatorPage() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { money: _money } = useMoney("calorie-calculator");
   const [sex, setSex] = useState<Sex>("male");
   const [age, setAge] = useState(30);
   const [weight, setWeight] = useState(70);

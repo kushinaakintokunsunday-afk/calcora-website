@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
 
 const FAQS = [
@@ -49,6 +50,7 @@ interface YearRow {
 }
 
 export default function RetirementCalculator() {
+  const { money } = useMoney("retirement-calculator");
   const [currentAge, setCurrentAge] = useState(30);
   const [retirementAge, setRetirementAge] = useState(65);
   const [currentSavings, setCurrentSavings] = useState(50000);
@@ -228,15 +230,15 @@ export default function RetirementCalculator() {
             </div>
             <div>
               <p className="text-sm text-text-secondary">Projected Nest Egg</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(results.finalBalance)}</p>
+              <p className="text-2xl font-bold text-navy">{money(results.finalBalance)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Contributions</p>
-              <p className="text-2xl font-bold text-green">{formatCurrency(results.totalContributions)}</p>
+              <p className="text-2xl font-bold text-green">{money(results.totalContributions)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Growth</p>
-              <p className="text-2xl font-bold text-green">{formatCurrency(results.totalGrowth)}</p>
+              <p className="text-2xl font-bold text-green">{money(results.totalGrowth)}</p>
             </div>
           </div>
         </div>
@@ -274,13 +276,13 @@ export default function RetirementCalculator() {
                       <tr key={row.age} className="border-b border-border last:border-0 hover:bg-surface/50">
                         <td className="px-4 py-2.5 text-text-primary font-medium">{row.age}</td>
                         <td className="px-4 py-2.5 text-right text-text-secondary">{row.year}</td>
-                        <td className="px-4 py-2.5 text-right text-text-primary font-medium">{formatCurrency(row.balance)}</td>
+                        <td className="px-4 py-2.5 text-right text-text-primary font-medium">{money(row.balance)}</td>
                         <td className="px-4 py-2.5 text-right">
-                          <span className="text-green">{formatCurrency(row.totalContributions)}</span>
+                          <span className="text-green">{money(row.totalContributions)}</span>
                           <span className="text-text-muted text-xs ml-1">({formatNumber(contribPct, 0)}%)</span>
                         </td>
                         <td className="px-4 py-2.5 text-right">
-                          <span className="text-navy">{formatCurrency(row.totalGrowth)}</span>
+                          <span className="text-navy">{money(row.totalGrowth)}</span>
                           <span className="text-text-muted text-xs ml-1">({formatNumber(growthPct, 0)}%)</span>
                         </td>
                       </tr>

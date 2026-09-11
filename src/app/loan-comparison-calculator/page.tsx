@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -77,6 +78,7 @@ function loanCosts(loan: LoanInput) {
 }
 
 export default function LoanComparisonCalculator() {
+  const { money } = useMoney("loan-comparison-calculator");
   const [loanA, setLoanA] = useState<LoanInput>({ amount: 25000, rate: 7, years: 4, fees: 0 });
   const [loanB, setLoanB] = useState<LoanInput>({ amount: 25000, rate: 5.5, years: 6, fees: 500 });
 
@@ -182,23 +184,23 @@ export default function LoanComparisonCalculator() {
               <tbody>
                 <tr className="border-b border-border">
                   <td className="px-3 py-2 text-text-secondary">Amount Financed (fees incl.)</td>
-                  <td className="px-3 py-2 text-right text-text-primary">{formatCurrency(results.a.financed)}</td>
-                  <td className="px-3 py-2 text-right text-text-primary">{formatCurrency(results.b.financed)}</td>
+                  <td className="px-3 py-2 text-right text-text-primary">{money(results.a.financed)}</td>
+                  <td className="px-3 py-2 text-right text-text-primary">{money(results.b.financed)}</td>
                 </tr>
                 <tr className="border-b border-border">
                   <td className="px-3 py-2 text-text-secondary">Monthly Payment</td>
-                  <td className="px-3 py-2 text-right text-text-primary">{formatCurrency(results.a.monthly)}</td>
-                  <td className="px-3 py-2 text-right text-text-primary">{formatCurrency(results.b.monthly)}</td>
+                  <td className="px-3 py-2 text-right text-text-primary">{money(results.a.monthly)}</td>
+                  <td className="px-3 py-2 text-right text-text-primary">{money(results.b.monthly)}</td>
                 </tr>
                 <tr className="border-b border-border">
                   <td className="px-3 py-2 text-text-secondary">Total Interest</td>
-                  <td className="px-3 py-2 text-right text-text-primary">{formatCurrency(results.a.totalInterest)}</td>
-                  <td className="px-3 py-2 text-right text-text-primary">{formatCurrency(results.b.totalInterest)}</td>
+                  <td className="px-3 py-2 text-right text-text-primary">{money(results.a.totalInterest)}</td>
+                  <td className="px-3 py-2 text-right text-text-primary">{money(results.b.totalInterest)}</td>
                 </tr>
                 <tr className="border-b border-border">
                   <td className="px-3 py-2 text-text-secondary">Total Cost</td>
-                  <td className="px-3 py-2 text-right text-text-primary">{formatCurrency(results.a.totalCost)}</td>
-                  <td className="px-3 py-2 text-right text-text-primary">{formatCurrency(results.b.totalCost)}</td>
+                  <td className="px-3 py-2 text-right text-text-primary">{money(results.a.totalCost)}</td>
+                  <td className="px-3 py-2 text-right text-text-primary">{money(results.b.totalCost)}</td>
                 </tr>
                 <tr>
                   <td className="px-3 py-2 text-text-secondary font-medium">Winner</td>
@@ -217,11 +219,11 @@ export default function LoanComparisonCalculator() {
             <ResultCard
               label="Differences"
               value={`${formatNumber((results.monthlyDiff / Math.max(results.a.monthly, results.b.monthly)) * 100, 0)}%`}
-              sub={formatCurrency(results.monthlyDiff)}
+              sub={money(results.monthlyDiff)}
             />
             <ResultCard
               label="Loan B vs Loan A Total Cost"
-              value={formatCurrency(results.b.totalCost - results.a.totalCost)}
+              value={money(results.b.totalCost - results.a.totalCost)}
               accent={results.b.totalCost >= results.a.totalCost ? "default" : "green"}
               sub={results.b.totalCost >= results.a.totalCost ? "more expensive by" : "savings by choosing B"}
             />

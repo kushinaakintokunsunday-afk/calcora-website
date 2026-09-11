@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -48,6 +49,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function CompoundSavingsCalculator() {
+  const { money } = useMoney("compound-savings-calculator");
   const [initial, setInitial] = useState(1000);
   const [monthly, setMonthly] = useState(300);
   const [rate, setRate] = useState(7);
@@ -161,9 +163,9 @@ export default function CompoundSavingsCalculator() {
         <div className="rounded-lg bg-surface border border-border p-6 mb-6">
           <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">Results</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <ResultCard label="Future Value" value={formatCurrency(results.futureValue)} accent="navy" />
-            <ResultCard label="Total Contributions" value={formatCurrency(results.totalContributions)} />
-            <ResultCard label="Interest Earned" value={formatCurrency(results.interestEarned)} accent="green" />
+            <ResultCard label="Future Value" value={money(results.futureValue)} accent="navy" />
+            <ResultCard label="Total Contributions" value={money(results.totalContributions)} />
+            <ResultCard label="Interest Earned" value={money(results.interestEarned)} accent="green" />
           </div>
         </div>
 
@@ -194,9 +196,9 @@ export default function CompoundSavingsCalculator() {
                 {results.yearlyTable.map((row) => (
                   <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                    <td className="px-4 py-2.5 text-right text-text-secondary">{formatCurrency(row.contributions)}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.value)}</td>
-                    <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.value - row.contributions)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-secondary">{money(row.contributions)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.value)}</td>
+                    <td className="px-4 py-2.5 text-right text-green">{money(row.value - row.contributions)}</td>
                   </tr>
                 ))}
               </tbody>

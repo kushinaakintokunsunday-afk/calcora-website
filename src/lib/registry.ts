@@ -517,3 +517,22 @@ export function calculatorSupportsCountry(slug: string, countryCode: string): bo
   if (calc.countryScope === "global") return true;
   return (calc.countryScope as string[]).includes(countryCode);
 }
+
+export function searchCalculators(query: string): CalculatorMeta[] {
+  const q = query.toLowerCase().trim();
+  if (!q) return CALCULATORS;
+  const tokens = q.split(/\s+/).filter(Boolean);
+  return CALCULATORS.filter((calc) => {
+    const haystack = [
+      calc.title,
+      calc.description,
+      calc.h1,
+      calc.category,
+      calc.slug,
+      ...calc.keywords,
+    ]
+      .join(" ")
+      .toLowerCase();
+    return tokens.every((tok) => haystack.includes(tok));
+  });
+}

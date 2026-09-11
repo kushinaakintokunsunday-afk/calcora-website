@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { SelectInput } from "@/components/ui/SelectInput";
 import { ResultCard } from "@/components/ui/Field";
@@ -65,6 +66,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function APYCalculator() {
+  const { money } = useMoney("apy-calculator");
   const [nominalApr, setNominalApr] = useState(5.0);
   const [frequency, setFrequency] = useState(12);
   const [startingBalance, setStartingBalance] = useState(10000);
@@ -147,8 +149,8 @@ export default function APYCalculator() {
           <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">Results</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <ResultCard label="APY (Effective Annual Rate)" value={`${formatNumber(results.apy, 3)}%`} accent="navy" />
-            <ResultCard label="Balance After 1 Year" value={formatCurrency(results.afterOneYear)} accent="navy" />
-            <ResultCard label="Interest Earned" value={formatCurrency(results.interestEarned)} accent="green" />
+            <ResultCard label="Balance After 1 Year" value={money(results.afterOneYear)} accent="navy" />
+            <ResultCard label="Interest Earned" value={money(results.interestEarned)} accent="green" />
           </div>
         </div>
 

@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, downloadCSV } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { SelectInput } from "@/components/ui/SelectInput";
 import { ResultCard } from "@/components/ui/Field";
@@ -60,6 +61,7 @@ interface MonthRow {
 }
 
 export default function PersonalLoanCalculator() {
+  const { money } = useMoney("personal-loan-calculator");
   const [loanAmount, setLoanAmount] = useState(15000);
   const [annualRate, setAnnualRate] = useState(10.5);
   const [termMonths, setTermMonths] = useState<string>("36");
@@ -191,11 +193,11 @@ export default function PersonalLoanCalculator() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <ResultCard label="Monthly Payment" value={formatCurrency(results.monthlyPayment)} accent="navy" />
-          <ResultCard label="Total Interest" value={formatCurrency(results.totalInterest)} accent="green" />
-          <ResultCard label="Total Repaid" value={formatCurrency(results.totalRepaid)} sub="Principal + interest" />
+          <ResultCard label="Monthly Payment" value={money(results.monthlyPayment)} accent="navy" />
+          <ResultCard label="Total Interest" value={money(results.totalInterest)} accent="green" />
+          <ResultCard label="Total Repaid" value={money(results.totalRepaid)} sub="Principal + interest" />
           {results.feeAmount > 0 && (
-            <ResultCard label="Origination Fee" value={formatCurrency(results.feeAmount)} sub={`You receive ${formatCurrency(results.effectiveAmount)}`} />
+            <ResultCard label="Origination Fee" value={money(results.feeAmount)} sub={`You receive ${money(results.effectiveAmount)}`} />
           )}
         </div>
 
@@ -228,10 +230,10 @@ export default function PersonalLoanCalculator() {
                   {results.schedule.map((row) => (
                     <tr key={row.month} className="border-b border-border last:border-0 hover:bg-surface/50">
                       <td className="px-4 py-2.5 text-text-primary">{row.month}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.payment)}</td>
-                      <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.principal)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-secondary">{formatCurrency(row.interest)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.balance)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.payment)}</td>
+                      <td className="px-4 py-2.5 text-right text-green">{money(row.principal)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-secondary">{money(row.interest)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.balance)}</td>
                     </tr>
                   ))}
                 </tbody>

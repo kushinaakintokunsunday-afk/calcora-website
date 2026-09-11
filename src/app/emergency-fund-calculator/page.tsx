@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { SelectInput } from "@/components/ui/SelectInput";
 import { ResultCard } from "@/components/ui/Field";
@@ -49,6 +50,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function EmergencyFundCalculator() {
+  const { money } = useMoney("emergency-fund-calculator");
   const [monthlyExpenses, setMonthlyExpenses] = useState(3500);
   const [targetMonths, setTargetMonths] = useState("6");
   const [currentlySaved, setCurrentlySaved] = useState(2000);
@@ -188,10 +190,10 @@ export default function EmergencyFundCalculator() {
         <div className="rounded-lg bg-surface border border-border p-6 mb-6">
           <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">Results</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ResultCard label="Emergency Fund Target" value={formatCurrency(results.target)} accent="navy" />
+            <ResultCard label="Emergency Fund Target" value={money(results.target)} accent="navy" />
             <ResultCard
               label="Remaining Gap"
-              value={results.gap === 0 ? "Fully Funded" : formatCurrency(results.gap)}
+              value={results.gap === 0 ? "Fully Funded" : money(results.gap)}
               accent={results.gap === 0 ? "green" : "default"}
             />
             <ResultCard
@@ -199,7 +201,7 @@ export default function EmergencyFundCalculator() {
               value={results.alreadyFunded ? "Already funded" : results.timeLabel!}
             />
             {!results.alreadyFunded && (
-              <ResultCard label="Total Interest Earned" value={formatCurrency(results.totalInterest)} accent="green" />
+              <ResultCard label="Total Interest Earned" value={money(results.totalInterest)} accent="green" />
             )}
           </div>
         </div>

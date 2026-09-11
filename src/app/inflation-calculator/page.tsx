@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
 
 const FAQS = [
@@ -48,6 +49,7 @@ interface YearRow {
 }
 
 export default function InflationCalculator() {
+  const { money } = useMoney("inflation-calculator");
   const [mode, setMode] = useState<"future" | "present">("future");
   const [futureValueInput, setFutureValueInput] = useState(0);
   const [presentValueInput, setPresentValueInput] = useState(10000);
@@ -241,7 +243,7 @@ export default function InflationCalculator() {
               <>
                 <div>
                   <p className="text-sm text-text-secondary">Future Value Needed</p>
-                  <p className="text-2xl font-bold text-navy">{formatCurrency(results.futureValue)}</p>
+                  <p className="text-2xl font-bold text-navy">{money(results.futureValue)}</p>
                 </div>
                 <div>
                   <p className="text-sm text-text-secondary">Purchasing Power Lost</p>
@@ -252,11 +254,11 @@ export default function InflationCalculator() {
               <>
                 <div>
                   <p className="text-sm text-text-secondary">Present Value (Today&apos;s Dollars)</p>
-                  <p className="text-2xl font-bold text-navy">{formatCurrency(results.presentValue ?? 0)}</p>
+                  <p className="text-2xl font-bold text-navy">{money(results.presentValue ?? 0)}</p>
                 </div>
                 <div>
                   <p className="text-sm text-text-secondary">Purchasing Power Lost</p>
-                  <p className="text-2xl font-bold text-green">{formatCurrency(results.purchasingPowerLost)}</p>
+                  <p className="text-2xl font-bold text-green">{money(results.purchasingPowerLost)}</p>
                 </div>
               </>
             )}
@@ -299,10 +301,10 @@ export default function InflationCalculator() {
                   {results.yearlyData.map((row) => (
                     <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                       <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.value)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.value)}</td>
                       <td className="px-4 py-2.5 text-right text-green">
                         {mode === "future"
-                          ? formatCurrency(row.purchasingPowerLost ?? 0)
+                          ? money(row.purchasingPowerLost ?? 0)
                           : formatNumber(
                               ((row.presentValue ?? row.value) /
                                 (mode === "present" ? Math.max(1, futureValueInput) : Math.max(1, presentValueInput))) *

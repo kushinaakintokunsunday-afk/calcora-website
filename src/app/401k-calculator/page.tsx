@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, downloadCSV } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -48,6 +49,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function FourZeroOneKCalculator() {
+  const { money } = useMoney("401k-calculator");
   const [currentAge, setCurrentAge] = useState(30);
   const [retirementAge, setRetirementAge] = useState(65);
   const [balance, setBalance] = useState(25000);
@@ -221,10 +223,10 @@ export default function FourZeroOneKCalculator() {
         <div className="rounded-lg bg-surface border border-border p-6 mb-6">
           <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">Results</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ResultCard label="Projected Balance at Retirement" value={formatCurrency(results.projectedBalance)} accent="navy" />
-            <ResultCard label="Total Own Contributions" value={formatCurrency(results.totalOwnContributions)} />
-            <ResultCard label="Total Employer Match" value={formatCurrency(results.totalEmployerMatch)} accent="green" />
-            <ResultCard label="Total Interest / Growth" value={formatCurrency(results.totalInterest)} />
+            <ResultCard label="Projected Balance at Retirement" value={money(results.projectedBalance)} accent="navy" />
+            <ResultCard label="Total Own Contributions" value={money(results.totalOwnContributions)} />
+            <ResultCard label="Total Employer Match" value={money(results.totalEmployerMatch)} accent="green" />
+            <ResultCard label="Total Interest / Growth" value={money(results.totalInterest)} />
           </div>
         </div>
 
@@ -255,9 +257,9 @@ export default function FourZeroOneKCalculator() {
                 {results.yearlyTable.map((row) => (
                   <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.cumulativeContributions)}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.balance)}</td>
-                    <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.growth)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.cumulativeContributions)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.balance)}</td>
+                    <td className="px-4 py-2.5 text-right text-green">{money(row.growth)}</td>
                   </tr>
                 ))}
               </tbody>

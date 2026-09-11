@@ -162,7 +162,7 @@ function getIcon(slug: string): ReactNode {
   return CALCULATOR_ICONS[slug] ?? null;
 }
 
-function CalculatorCard({ calc }: { calc: CalculatorMeta }) {
+export function CalculatorCard({ calc }: { calc: CalculatorMeta }) {
   return (
     <Link
       href={calc.path}

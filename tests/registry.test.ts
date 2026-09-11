@@ -5,6 +5,7 @@ import {
   getRelatedCalculators,
   calculatorSupportsCountry,
   getCalculatorsByCategory,
+  searchCalculators,
 } from "@/lib/registry";
 
 describe("calculator registry", () => {
@@ -72,5 +73,17 @@ describe("calculator registry", () => {
     expect(getCalculatorsByCategory("investment").length).toBeGreaterThan(0);
     expect(getCalculatorsByCategory("health").length).toBeGreaterThan(0);
     expect(getCalculatorsByCategory("tax").length).toBeGreaterThan(0);
+  });
+
+  it("searchCalculators finds tools by keyword, title, and category", () => {
+    expect(searchCalculators("mortgage").some((c) => c.slug === "mortgage-calculator")).toBe(true);
+    expect(searchCalculators("APY").some((c) => c.slug === "apy-calculator")).toBe(true);
+    expect(searchCalculators("health").some((c) => c.category === "health")).toBe(true);
+    expect(searchCalculators("rule of 72").some((c) => c.slug === "rule-of-72-calculator")).toBe(true);
+  });
+
+  it("searchCalculators returns everything for an empty query and nothing for gibberish", () => {
+    expect(searchCalculators("").length).toBe(CALCULATORS.length);
+    expect(searchCalculators("zxqjibberish")).toHaveLength(0);
   });
 });

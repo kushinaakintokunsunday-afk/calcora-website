@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -49,6 +50,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function CAGRCalculator() {
+  const { money } = useMoney("cagr-calculator");
   const [beginningValue, setBeginningValue] = useState(10000);
   const [endingValue, setEndingValue] = useState(20000);
   const [years, setYears] = useState(5);
@@ -138,7 +140,7 @@ export default function CAGRCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <ResultCard label="CAGR" value={`${formatNumber(results.cagr * 100, 2)}%`} accent="green" />
             <ResultCard label="Total Return" value={`${formatNumber(results.totalReturn, 1)}%`} />
-            <ResultCard label="Total Gain" value={formatCurrency(results.gain)} accent="navy" />
+            <ResultCard label="Total Gain" value={money(results.gain)} accent="navy" />
           </div>
         </div>
 
@@ -168,8 +170,8 @@ export default function CAGRCalculator() {
                 {results.yearlyTable.map((row) => (
                   <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.value)}</td>
-                    <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.growth)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.value)}</td>
+                    <td className="px-4 py-2.5 text-right text-green">{money(row.growth)}</td>
                   </tr>
                 ))}
               </tbody>

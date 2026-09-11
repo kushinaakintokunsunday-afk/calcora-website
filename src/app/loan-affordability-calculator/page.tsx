@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
 
 type Mode = "max-loan" | "monthly-payment";
@@ -67,6 +67,7 @@ function calcMonthlyPayment(loanAmount: number, annualRate: number, years: numbe
 }
 
 export default function LoanAffordabilityCalculator() {
+  const { money } = useMoney("loan-affordability-calculator");
   const [mode, setMode] = useState<Mode>("max-loan");
   const [monthlyPayment, setMonthlyPayment] = useState(1000);
   const [loanAmount, setLoanAmount] = useState(250000);
@@ -206,16 +207,16 @@ export default function LoanAffordabilityCalculator() {
                 {mode === "max-loan" ? "Max Loan Amount" : "Monthly Payment"}
               </p>
               <p className="text-2xl font-bold text-navy">
-                {formatCurrency(mode === "max-loan" ? maxLoanResult.maxLoan : paymentResult.monthlyPayment)}
+                {money(mode === "max-loan" ? maxLoanResult.maxLoan : paymentResult.monthlyPayment)}
               </p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Amount Paid</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(results.totalPaid)}</p>
+              <p className="text-2xl font-bold text-navy">{money(results.totalPaid)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Interest</p>
-              <p className="text-2xl font-bold text-green">{formatCurrency(results.totalInterest)}</p>
+              <p className="text-2xl font-bold text-green">{money(results.totalInterest)}</p>
             </div>
           </div>
         </div>

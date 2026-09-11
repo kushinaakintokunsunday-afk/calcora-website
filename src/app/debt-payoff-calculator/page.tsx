@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, downloadCSV } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
 
 const FAQS = [
@@ -94,6 +95,7 @@ function calcPayoff(balance: number, apr: number, monthlyPayment: number) {
 }
 
 export default function DebtPayoffCalculator() {
+  const { money } = useMoney("debt-payoff-calculator");
   const [balance, setBalance] = useState(15000);
   const [apr, setApr] = useState(18);
   const [monthlyPayment, setMonthlyPayment] = useState(500);
@@ -192,7 +194,7 @@ export default function DebtPayoffCalculator() {
             />
             {isInsufficient && balance > 0 && (
               <p className="mt-1 text-xs text-red-600">
-                Payment must be at least {formatCurrency(minPayment)}/month to cover interest.
+                Payment must be at least {money(minPayment)}/month to cover interest.
               </p>
             )}
           </div>
@@ -214,11 +216,11 @@ export default function DebtPayoffCalculator() {
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Interest Paid</p>
-              <p className="text-2xl font-bold text-green">{formatCurrency(result.totalInterest)}</p>
+              <p className="text-2xl font-bold text-green">{money(result.totalInterest)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Total Amount Paid</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(result.totalPaid)}</p>
+              <p className="text-2xl font-bold text-navy">{money(result.totalPaid)}</p>
             </div>
           </div>
         </div>
@@ -274,10 +276,10 @@ export default function DebtPayoffCalculator() {
                   {displaySchedule.map((row) => (
                     <tr key={row.month} className="border-b border-border last:border-0 hover:bg-surface/50">
                       <td className="px-4 py-2.5 text-text-primary">{row.month}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.payment)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.principal)}</td>
-                      <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.interest)}</td>
-                      <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.balance)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.payment)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.principal)}</td>
+                      <td className="px-4 py-2.5 text-right text-green">{money(row.interest)}</td>
+                      <td className="px-4 py-2.5 text-right text-text-primary">{money(row.balance)}</td>
                     </tr>
                   ))}
                 </tbody>

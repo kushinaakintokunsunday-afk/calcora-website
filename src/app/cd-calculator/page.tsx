@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { SelectInput } from "@/components/ui/SelectInput";
 import { ResultCard } from "@/components/ui/Field";
@@ -56,6 +57,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function CDCalculator() {
+  const { money } = useMoney("cd-calculator");
   const [principal, setPrincipal] = useState(10000);
   const [apy, setApy] = useState(5.0);
   const [termMonths, setTermMonths] = useState(12);
@@ -153,8 +155,8 @@ export default function CDCalculator() {
         <div className="rounded-lg bg-surface border border-border p-6 mb-6">
           <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">Results</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ResultCard label="Maturity Value" value={formatCurrency(results.maturityValue)} accent="navy" />
-            <ResultCard label="Total Interest Earned" value={formatCurrency(results.interestEarned)} accent="green" />
+            <ResultCard label="Maturity Value" value={money(results.maturityValue)} accent="navy" />
+            <ResultCard label="Total Interest Earned" value={money(results.interestEarned)} accent="green" />
             <ResultCard label="Effective APY" value={`${formatNumber(results.effectiveApy, 3)}%`} />
             <ResultCard label="Total Growth" value={`${formatNumber(results.growthPct, 2)}%`} />
           </div>
@@ -186,8 +188,8 @@ export default function CDCalculator() {
                 {results.monthlyTable.slice(0, 60).map((row) => (
                   <tr key={row.month} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-primary">{row.month}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.balance)}</td>
-                    <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.interest)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.balance)}</td>
+                    <td className="px-4 py-2.5 text-right text-green">{money(row.interest)}</td>
                   </tr>
                 ))}
               </tbody>

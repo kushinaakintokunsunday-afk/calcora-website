@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
+import { CountryProvider } from "@/lib/useCountry";
 import { WebSiteSchema } from "@/components/Schema";
 
 const inter = Inter({
@@ -55,10 +56,12 @@ export default function RootLayout({
         <WebSiteSchema />
       </head>
       <body className="min-h-full flex flex-col antialiased">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <CookieConsent />
+        <CountryProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <CookieConsent />
+        </CountryProvider>
       </body>
     </html>
   );

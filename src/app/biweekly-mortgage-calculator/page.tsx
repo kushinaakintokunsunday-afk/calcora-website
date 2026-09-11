@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -55,6 +56,7 @@ interface YearlyRow {
 }
 
 export default function BiweeklyMortgageCalculator() {
+  const { money } = useMoney("biweekly-mortgage-calculator");
   const [loanAmount, setLoanAmount] = useState(300000);
   const [annualRate, setAnnualRate] = useState(6.5);
   const [loanTermYears, setLoanTermYears] = useState(30);
@@ -225,14 +227,14 @@ export default function BiweeklyMortgageCalculator() {
         <div className="rounded-lg bg-surface border border-border p-6 mb-6">
           <h2 className="text-sm font-medium text-text-muted uppercase tracking-wider mb-4">Results</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <ResultCard label="Standard Monthly Payment" value={formatCurrency(results.standardMonthly)} accent="navy" />
-            <ResultCard label="Biweekly Payment" value={formatCurrency(results.biweeklyPayment)} />
-            <ResultCard label="Standard Total Interest" value={formatCurrency(results.standardTotalInterest)} />
-            <ResultCard label="Biweekly Total Interest" value={formatCurrency(results.biweeklyTotalInterest)} accent="green" />
+            <ResultCard label="Standard Monthly Payment" value={money(results.standardMonthly)} accent="navy" />
+            <ResultCard label="Biweekly Payment" value={money(results.biweeklyPayment)} />
+            <ResultCard label="Standard Total Interest" value={money(results.standardTotalInterest)} />
+            <ResultCard label="Biweekly Total Interest" value={money(results.biweeklyTotalInterest)} accent="green" />
           </div>
           <div className="mt-4 rounded-lg bg-green/5 border border-green/30 p-4">
             <p className="text-sm font-medium text-navy">
-              Biweekly saves {formatCurrency(results.interestSaved)} and pays off {results.monthsSaved} months (~{formatNumber(results.monthsSaved / 12, 1)} years) earlier.
+              Biweekly saves {money(results.interestSaved)} and pays off {results.monthsSaved} months (~{formatNumber(results.monthsSaved / 12, 1)} years) earlier.
             </p>
           </div>
         </div>
@@ -264,9 +266,9 @@ export default function BiweeklyMortgageCalculator() {
                 {results.yearlyTable.map((row) => (
                   <tr key={row.year} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-primary">{row.year}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.standardBalance)}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(row.biweeklyBalance)}</td>
-                    <td className="px-4 py-2.5 text-right text-green">{formatCurrency(row.cumulativeInterestSaved)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.standardBalance)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(row.biweeklyBalance)}</td>
+                    <td className="px-4 py-2.5 text-right text-green">{money(row.cumulativeInterestSaved)}</td>
                   </tr>
                 ))}
               </tbody>

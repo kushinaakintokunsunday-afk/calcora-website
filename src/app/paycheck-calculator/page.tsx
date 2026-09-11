@@ -8,7 +8,8 @@ import {
   FAQSchema,
   WebApplicationSchema,
 } from "@/components/Schema";
-import { downloadCSV, formatCurrency } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 
 type PayFrequency = "weekly" | "biweekly" | "semimonthly" | "monthly";
 
@@ -62,6 +63,7 @@ const inputClass =
   "w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-green/50";
 
 export default function PaycheckCalculatorPage() {
+  const { money } = useMoney("paycheck-calculator");
   const [salary, setSalary] = useState(60000);
   const [frequency, setFrequency] = useState<PayFrequency>("biweekly");
   const [federalRate, setFederalRate] = useState(22);
@@ -154,7 +156,7 @@ export default function PaycheckCalculatorPage() {
                 htmlFor="paycheck-salary"
                 className="mb-1.5 block text-sm font-medium text-text-primary"
               >
-                Annual gross salary ({formatCurrency(0, "USD").replace("$0", "$")})
+                Annual gross salary ({money(0).replace(/0/g, "")})
               </label>
               <input
                 id="paycheck-salary"
@@ -265,16 +267,16 @@ export default function PaycheckCalculatorPage() {
                     Gross pay per period
                   </p>
                   <p className="text-2xl font-bold text-navy">
-                    {formatCurrency(result.grossPerPeriod)}
+                    {money(result.grossPerPeriod)}
                   </p>
                 </div>
                 <div className="rounded-lg border border-green bg-green/5 p-4">
                   <p className="text-sm text-text-muted">Net pay per period</p>
                   <p className="text-2xl font-bold text-green">
-                    {formatCurrency(result.netPerPeriod)}
+                    {money(result.netPerPeriod)}
                   </p>
                   <p className="mt-1 text-xs text-text-muted">
-                    {formatCurrency(result.netAnnual)} per year
+                    {money(result.netAnnual)} per year
                   </p>
                 </div>
               </div>
@@ -306,10 +308,10 @@ export default function PaycheckCalculatorPage() {
                           </span>
                         </td>
                         <td className="px-4 py-2.5 text-right font-medium text-text-primary">
-                          {formatCurrency(row.perPeriod)}
+                          {money(row.perPeriod)}
                         </td>
                         <td className="px-4 py-2.5 text-right font-medium text-text-primary">
-                          {formatCurrency(row.annual)}
+                          {money(row.annual)}
                         </td>
                       </tr>
                     ))}

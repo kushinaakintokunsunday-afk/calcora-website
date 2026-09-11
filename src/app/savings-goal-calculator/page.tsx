@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber, downloadCSV } from "@/lib/utils";
+import { formatNumber, downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -71,6 +72,7 @@ function monthsToGoal(
 }
 
 export default function SavingsGoalCalculator() {
+  const { money } = useMoney("savings-goal-calculator");
   const [current, setCurrent] = useState(5000);
   const [target, setTarget] = useState(50000);
   const [monthly, setMonthly] = useState(300);
@@ -173,8 +175,8 @@ export default function SavingsGoalCalculator() {
             <>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <ResultCard label="Time to Reach Goal" value={`${results.months} months`} accent="navy" sub={`≈ ${formatNumber(results.years, 1)} years`} />
-                <ResultCard label="Total Contributions" value={formatCurrency(results.contributions)} />
-                <ResultCard label="Interest Earned" value={formatCurrency(results.interest)} accent="green" />
+                <ResultCard label="Total Contributions" value={money(results.contributions)} />
+                <ResultCard label="Interest Earned" value={money(results.interest)} accent="green" />
               </div>
               <button
                 type="button"

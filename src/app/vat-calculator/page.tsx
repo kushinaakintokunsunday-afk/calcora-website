@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, formatNumber } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
 
 type VatMode = "add" | "remove";
@@ -48,6 +49,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function VatCalculator() {
+  const { money } = useMoney("vat-calculator");
   const [mode, setMode] = useState<VatMode>("add");
   const [amount, setAmount] = useState(100);
   const [vatRate, setVatRate] = useState(20);
@@ -199,15 +201,15 @@ export default function VatCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <p className="text-sm text-text-secondary">VAT Amount</p>
-              <p className="text-2xl font-bold text-green">{formatCurrency(results.vat)}</p>
+              <p className="text-2xl font-bold text-green">{money(results.vat)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Net Price</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(results.net)}</p>
+              <p className="text-2xl font-bold text-navy">{money(results.net)}</p>
             </div>
             <div>
               <p className="text-sm text-text-secondary">Gross Price</p>
-              <p className="text-2xl font-bold text-navy">{formatCurrency(results.gross)}</p>
+              <p className="text-2xl font-bold text-navy">{money(results.gross)}</p>
             </div>
           </div>
         </div>

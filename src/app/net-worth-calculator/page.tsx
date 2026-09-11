@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react";
 import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
-import { formatCurrency, downloadCSV } from "@/lib/utils";
+import { downloadCSV } from "@/lib/utils";
+import { useMoney } from "@/lib/useCountry";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { ResultCard } from "@/components/ui/Field";
 import { AdSlot } from "@/components/AdSlot";
@@ -48,6 +49,7 @@ const RELATED_TOOLS = [
 ];
 
 export default function NetWorthCalculator() {
+  const { money } = useMoney("net-worth-calculator");
   const [cashSavings, setCashSavings] = useState(15000);
   const [investments, setInvestments] = useState(45000);
   const [homeValue, setHomeValue] = useState(350000);
@@ -223,12 +225,12 @@ export default function NetWorthCalculator() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <ResultCard
               label="Net Worth"
-              value={formatCurrency(results.netWorth)}
+              value={money(results.netWorth)}
               accent="navy"
               sub={results.netWorth < 0 ? "Negative net worth — focus on reducing debt and building savings." : undefined}
             />
-            <ResultCard label="Total Assets" value={formatCurrency(results.totalAssets)} accent="green" />
-            <ResultCard label="Total Liabilities" value={formatCurrency(results.totalLiabilities)} />
+            <ResultCard label="Total Assets" value={money(results.totalAssets)} accent="green" />
+            <ResultCard label="Total Liabilities" value={money(results.totalLiabilities)} />
           </div>
         </div>
 
@@ -263,12 +265,12 @@ export default function NetWorthCalculator() {
                   <tr key={a.label} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-muted" />
                     <td className="px-4 py-2.5 text-text-primary">{a.label}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(a.amount)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(a.amount)}</td>
                   </tr>
                 ))}
                 <tr className="border-b border-border bg-surface/30">
                   <td className="px-4 py-2.5 font-medium text-navy" colSpan={2}>Total Assets</td>
-                  <td className="px-4 py-2.5 text-right font-medium text-navy">{formatCurrency(results.totalAssets)}</td>
+                  <td className="px-4 py-2.5 text-right font-medium text-navy">{money(results.totalAssets)}</td>
                 </tr>
                 <tr className="bg-surface/50">
                   <td className="px-4 py-2.5 font-medium text-navy" colSpan={2}>Liabilities</td>
@@ -278,16 +280,16 @@ export default function NetWorthCalculator() {
                   <tr key={l.label} className="border-b border-border last:border-0 hover:bg-surface/50">
                     <td className="px-4 py-2.5 text-text-muted" />
                     <td className="px-4 py-2.5 text-text-primary">{l.label}</td>
-                    <td className="px-4 py-2.5 text-right text-text-primary">{formatCurrency(l.amount)}</td>
+                    <td className="px-4 py-2.5 text-right text-text-primary">{money(l.amount)}</td>
                   </tr>
                 ))}
                 <tr className="border-b border-border bg-surface/30">
                   <td className="px-4 py-2.5 font-medium text-navy" colSpan={2}>Total Liabilities</td>
-                  <td className="px-4 py-2.5 text-right font-medium text-navy">{formatCurrency(results.totalLiabilities)}</td>
+                  <td className="px-4 py-2.5 text-right font-medium text-navy">{money(results.totalLiabilities)}</td>
                 </tr>
                 <tr className="bg-navy/5">
                   <td className="px-4 py-3 font-bold text-navy" colSpan={2}>Net Worth</td>
-                  <td className="px-4 py-3 text-right font-bold text-navy">{formatCurrency(results.netWorth)}</td>
+                  <td className="px-4 py-3 text-right font-bold text-navy">{money(results.netWorth)}</td>
                 </tr>
               </tbody>
             </table>
