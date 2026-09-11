@@ -6,6 +6,7 @@ import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/compone
 import { formatNumber } from "@/lib/utils";
 import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
+import { NumberInput } from "@/components/NumberInput";
 
 type VatMode = "add" | "remove";
 
@@ -53,10 +54,10 @@ export default function VatCalculator() {
   const [mode, setMode] = useState<VatMode>("add");
   const [amount, setAmount] = useState(100);
   const [vatRate, setVatRate] = useState(20);
-  const [customRate, setCustomRate] = useState("");
+  const [customRate, setCustomRate] = useState<number>(0);
   const [activePreset, setActivePreset] = useState(0);
 
-  const effectiveRate = activePreset === -1 ? (parseFloat(customRate) || 0) : PRESET_RATES[activePreset]?.value ?? vatRate;
+  const effectiveRate = activePreset === -1 ? customRate : PRESET_RATES[activePreset]?.value ?? vatRate;
 
   const results = useMemo(() => {
     const rate = Math.max(0, effectiveRate);
@@ -154,18 +155,15 @@ export default function VatCalculator() {
 
         {activePreset === -1 && (
           <div className="mb-6">
-            <label htmlFor="vat-custom-rate" className="block text-sm font-medium text-text-primary mb-1">
-              Custom VAT Rate (%)
-            </label>
-            <input
+            <NumberInput
               id="vat-custom-rate"
-              type="number"
+              label="Custom VAT Rate (%)"
+              value={customRate}
+              onChange={(n) => setCustomRate(n)}
               min={0}
               max={100}
               step={0.1}
-              value={customRate}
-              onChange={(e) => setCustomRate(e.target.value)}
-              placeholder="Enter rate"
+              suffix="%"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
@@ -173,16 +171,14 @@ export default function VatCalculator() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           <div>
-            <label htmlFor="vat-amount" className="block text-sm font-medium text-text-primary mb-1">
-              {mode === "add" ? "Net Price ($)" : "Gross Price ($)"}
-            </label>
-            <input
+            <NumberInput
               id="vat-amount"
-              type="number"
+              label={mode === "add" ? "Net Price ($)" : "Gross Price ($)"}
+              value={amount}
+              onChange={(n) => setAmount(n)}
               min={0}
               step={0.01}
-              value={amount}
-              onChange={(e) => setAmount(parseFloat(e.target.value) || 0)}
+              prefix="$"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>

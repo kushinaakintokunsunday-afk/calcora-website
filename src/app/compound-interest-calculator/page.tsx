@@ -6,6 +6,7 @@ import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/compone
 import { formatNumber, downloadCSV } from "@/lib/utils";
 import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
+import { NumberInput } from "@/components/NumberInput";
 
 const FREQUENCIES = [
   { label: "Daily", value: 365 },
@@ -105,50 +106,37 @@ export default function CompoundInterestCalculator() {
         breadcrumbs={[{ label: "Compound Interest Calculator" }]}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-          <div>
-            <label htmlFor="ci-principal" className="block text-sm font-medium text-text-primary mb-1">
-              Principal Amount ($)
-            </label>
-            <input
-              id="ci-principal"
-              type="number"
-              min={0}
-              step={100}
-              value={principal}
-              onChange={(e) => setPrincipal(parseFloat(e.target.value) || 0)}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-            />
-          </div>
-          <div>
-            <label htmlFor="ci-rate" className="block text-sm font-medium text-text-primary mb-1">
-              Annual Interest Rate (%)
-            </label>
-            <input
-              id="ci-rate"
-              type="number"
-              min={0}
-              max={100}
-              step={0.1}
-              value={rate}
-              onChange={(e) => setRate(parseFloat(e.target.value) || 0)}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-            />
-          </div>
-          <div>
-            <label htmlFor="ci-years" className="block text-sm font-medium text-text-primary mb-1">
-              Time Period (years)
-            </label>
-            <input
-              id="ci-years"
-              type="number"
-              min={0}
-              max={50}
-              step={1}
-              value={years}
-              onChange={(e) => setYears(parseInt(e.target.value) || 0)}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-            />
-          </div>
+          <NumberInput
+            id="ci-principal"
+            label="Principal Amount ($)"
+            value={principal}
+            onChange={setPrincipal}
+            min={0}
+            step={100}
+            prefix="$"
+            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+          />
+          <NumberInput
+            id="ci-rate"
+            label="Annual Interest Rate (%)"
+            value={rate}
+            onChange={setRate}
+            min={0}
+            max={100}
+            step={0.1}
+            suffix="%"
+            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+          />
+          <NumberInput
+            id="ci-years"
+            label="Time Period (years)"
+            value={years}
+            onChange={setYears}
+            min={0}
+            max={50}
+            step={1}
+            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+          />
           <div>
             <label htmlFor="ci-frequency" className="block text-sm font-medium text-text-primary mb-1">
               Compounding Frequency

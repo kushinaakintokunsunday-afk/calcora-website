@@ -6,6 +6,7 @@ import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/compone
 import { formatNumber, downloadCSV } from "@/lib/utils";
 import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
+import { NumberInput } from "@/components/NumberInput";
 
 const FAQS = [
   {
@@ -175,47 +176,41 @@ export default function InflationCalculator() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           {mode === "future" ? (
             <div>
-              <label htmlFor="inf-pv" className="block text-sm font-medium text-text-primary mb-1">
-                Present Amount ($)
-              </label>
-              <input
+              <NumberInput
                 id="inf-pv"
-                type="number"
+                label="Present Amount"
                 min={0}
                 step={100}
                 value={presentValueInput}
-                onChange={(e) => setPresentValueInput(parseFloat(e.target.value) || 0)}
+                onChange={setPresentValueInput}
+                prefix="$"
                 className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
               />
             </div>
           ) : (
             <div>
-              <label htmlFor="inf-fv" className="block text-sm font-medium text-text-primary mb-1">
-                Future Amount ($)
-              </label>
-              <input
+              <NumberInput
                 id="inf-fv"
-                type="number"
+                label="Future Amount"
                 min={0}
                 step={100}
                 value={futureValueInput}
-                onChange={(e) => setFutureValueInput(parseFloat(e.target.value) || 0)}
+                onChange={setFutureValueInput}
+                prefix="$"
                 className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
               />
             </div>
           )}
           <div>
-            <label htmlFor="inf-rate" className="block text-sm font-medium text-text-primary mb-1">
-              Annual Inflation Rate (%)
-            </label>
-            <input
+            <NumberInput
               id="inf-rate"
-              type="number"
+              label="Annual Inflation Rate (%)"
               min={0}
               max={50}
               step={0.1}
               value={inflationRate}
-              onChange={(e) => setInflationRate(parseFloat(e.target.value) || 0)}
+              onChange={setInflationRate}
+              suffix="%"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>

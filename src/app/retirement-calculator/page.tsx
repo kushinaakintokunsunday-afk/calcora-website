@@ -6,6 +6,7 @@ import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/compone
 import { formatNumber, downloadCSV } from "@/lib/utils";
 import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
+import { NumberInput } from "@/components/NumberInput";
 
 const FAQS = [
   {
@@ -131,90 +132,76 @@ export default function RetirementCalculator() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           <div>
-            <label htmlFor="ret-current-age" className="block text-sm font-medium text-text-primary mb-1">
-              Current Age
-            </label>
-            <input
+            <NumberInput
               id="ret-current-age"
-              type="number"
+              label="Current Age"
+              value={currentAge}
+              onChange={(n) => setCurrentAge(n)}
               min={0}
               max={100}
               step={1}
-              value={currentAge}
-              onChange={(e) => setCurrentAge(parseInt(e.target.value) || 0)}
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="ret-retirement-age" className="block text-sm font-medium text-text-primary mb-1">
-              Retirement Age
-            </label>
-            <input
+            <NumberInput
               id="ret-retirement-age"
-              type="number"
+              label="Retirement Age"
+              value={retirementAge}
+              onChange={(n) => setRetirementAge(n)}
               min={1}
               max={100}
               step={1}
-              value={retirementAge}
-              onChange={(e) => setRetirementAge(parseInt(e.target.value) || 1)}
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="ret-savings" className="block text-sm font-medium text-text-primary mb-1">
-              Current Savings ($)
-            </label>
-            <input
+            <NumberInput
               id="ret-savings"
-              type="number"
+              label="Current Savings ($)"
+              value={currentSavings}
+              onChange={(n) => setCurrentSavings(n)}
               min={0}
               step={1000}
-              value={currentSavings}
-              onChange={(e) => setCurrentSavings(parseFloat(e.target.value) || 0)}
+              prefix="$"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="ret-contribution" className="block text-sm font-medium text-text-primary mb-1">
-              Monthly Contribution ($)
-            </label>
-            <input
+            <NumberInput
               id="ret-contribution"
-              type="number"
+              label="Monthly Contribution ($)"
+              value={monthlyContribution}
+              onChange={(n) => setMonthlyContribution(n)}
               min={0}
               step={50}
-              value={monthlyContribution}
-              onChange={(e) => setMonthlyContribution(parseFloat(e.target.value) || 0)}
+              prefix="$"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="ret-return" className="block text-sm font-medium text-text-primary mb-1">
-              Annual Return (%)
-            </label>
-            <input
+            <NumberInput
               id="ret-return"
-              type="number"
+              label="Annual Return (%)"
+              value={annualReturn}
+              onChange={(n) => setAnnualReturn(n)}
               min={0}
               max={50}
               step={0.1}
-              value={annualReturn}
-              onChange={(e) => setAnnualReturn(parseFloat(e.target.value) || 0)}
+              suffix="%"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="ret-employer" className="block text-sm font-medium text-text-primary mb-1">
-              Employer Match (%)
-            </label>
-            <input
+            <NumberInput
               id="ret-employer"
-              type="number"
+              label="Employer Match (%)"
+              value={employerMatch}
+              onChange={(n) => setEmployerMatch(n)}
               min={0}
               max={100}
               step={0.5}
-              value={employerMatch}
-              onChange={(e) => setEmployerMatch(parseFloat(e.target.value) || 0)}
+              suffix="%"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
             <p className="text-xs text-text-muted mt-1">Percentage of your contribution matched by employer</p>

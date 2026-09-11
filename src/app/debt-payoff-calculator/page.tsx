@@ -6,6 +6,7 @@ import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/compone
 import { downloadCSV } from "@/lib/utils";
 import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
+import { NumberInput } from "@/components/NumberInput";
 
 const FAQS = [
   {
@@ -150,54 +151,42 @@ export default function DebtPayoffCalculator() {
         breadcrumbs={[{ label: "Debt Payoff Calculator" }]}
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-          <div>
-            <label htmlFor="dp-balance" className="block text-sm font-medium text-text-primary mb-1">
-              Outstanding Balance ($)
-            </label>
-            <input
-              id="dp-balance"
-              type="number"
-              min={0}
-              step={100}
-              value={balance}
-              onChange={(e) => setBalance(parseFloat(e.target.value) || 0)}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-            />
-          </div>
-          <div>
-            <label htmlFor="dp-apr" className="block text-sm font-medium text-text-primary mb-1">
-              APR (%)
-            </label>
-            <input
-              id="dp-apr"
-              type="number"
-              min={0}
-              max={100}
-              step={0.1}
-              value={apr}
-              onChange={(e) => setApr(parseFloat(e.target.value) || 0)}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-            />
-          </div>
-          <div>
-            <label htmlFor="dp-payment" className="block text-sm font-medium text-text-primary mb-1">
-              Monthly Payment ($)
-            </label>
-            <input
-              id="dp-payment"
-              type="number"
-              min={0}
-              step={25}
-              value={monthlyPayment}
-              onChange={(e) => setMonthlyPayment(parseFloat(e.target.value) || 0)}
-              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-            />
-            {isInsufficient && balance > 0 && (
-              <p className="mt-1 text-xs text-red-600">
-                Payment must be at least {money(minPayment)}/month to cover interest.
-              </p>
-            )}
-          </div>
+          <NumberInput
+            id="dp-balance"
+            label="Outstanding Balance ($)"
+            value={balance}
+            onChange={setBalance}
+            min={0}
+            step={100}
+            prefix="$"
+            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+          />
+          <NumberInput
+            id="dp-apr"
+            label="APR (%)"
+            value={apr}
+            onChange={setApr}
+            min={0}
+            max={100}
+            step={0.1}
+            suffix="%"
+            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+          />
+          <NumberInput
+            id="dp-payment"
+            label="Monthly Payment ($)"
+            value={monthlyPayment}
+            onChange={setMonthlyPayment}
+            min={0}
+            step={25}
+            prefix="$"
+            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+          />
+          {isInsufficient && balance > 0 && (
+            <p className="mt-1 text-xs text-red-600">
+              Payment must be at least {money(minPayment)}/month to cover interest.
+            </p>
+          )}
         </div>
 
         <div className="rounded-lg bg-surface border border-border p-6 mb-6">

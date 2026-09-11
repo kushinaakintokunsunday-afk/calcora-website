@@ -6,6 +6,7 @@ import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/compone
 import { formatNumber, downloadCSV } from "@/lib/utils";
 import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
+import { NumberInput } from "@/components/NumberInput";
 
 const FAQS = [
   {
@@ -147,45 +148,38 @@ export default function EMICalculator() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           <div>
-            <label htmlFor="emi-principal" className="block text-sm font-medium text-text-primary mb-1">
-              Loan Amount ($)
-            </label>
-            <input
+            <NumberInput
               id="emi-principal"
-              type="number"
+              label="Loan Amount ($)"
               min={0}
               step={1000}
               value={loanAmount}
-              onChange={(e) => setLoanAmount(parseFloat(e.target.value) || 0)}
+              onChange={setLoanAmount}
+              prefix="$"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="emi-rate" className="block text-sm font-medium text-text-primary mb-1">
-              Annual Interest Rate (%)
-            </label>
-            <input
+            <NumberInput
               id="emi-rate"
-              type="number"
+              label="Annual Interest Rate (%)"
               min={0}
               max={50}
               step={0.1}
               value={annualRate}
-              onChange={(e) => setAnnualRate(parseFloat(e.target.value) || 0)}
+              onChange={setAnnualRate}
+              suffix="%"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="emi-tenure" className="block text-sm font-medium text-text-primary mb-1">
-              Loan Tenure
-            </label>
-            <input
+            <NumberInput
               id="emi-tenure"
-              type="number"
+              label="Loan Tenure"
               min={1}
               step={1}
               value={tenureValue}
-              onChange={(e) => setTenureValue(parseInt(e.target.value) || 1)}
+              onChange={setTenureValue}
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>

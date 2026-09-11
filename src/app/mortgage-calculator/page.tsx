@@ -6,6 +6,7 @@ import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/compone
 import { downloadCSV } from "@/lib/utils";
 import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
+import { NumberInput } from "@/components/NumberInput";
 
 const TERMS = [15, 20, 30];
 
@@ -164,46 +165,40 @@ export default function MortgageCalculator() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           <div>
-            <label htmlFor="mg-price" className="block text-sm font-medium text-text-primary mb-1">
-              Home Price ($)
-            </label>
-            <input
+            <NumberInput
               id="mg-price"
-              type="number"
               min={0}
               step={1000}
+              label="Home Price ($)"
+              prefix="$"
               value={homePrice}
-              onChange={(e) => setHomePrice(parseFloat(e.target.value) || 0)}
+              onChange={setHomePrice}
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="mg-dp" className="block text-sm font-medium text-text-primary mb-1">
-              Down Payment (%)
-            </label>
-            <input
+            <NumberInput
               id="mg-dp"
-              type="number"
               min={0}
               max={100}
               step={0.5}
+              label="Down Payment (%)"
+              suffix="%"
               value={downPaymentPct}
-              onChange={(e) => setDownPaymentPct(parseFloat(e.target.value) || 0)}
+              onChange={setDownPaymentPct}
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="mg-rate" className="block text-sm font-medium text-text-primary mb-1">
-              Interest Rate (%)
-            </label>
-            <input
+            <NumberInput
               id="mg-rate"
-              type="number"
               min={0}
               max={30}
               step={0.1}
+              label="Interest Rate (%)"
+              suffix="%"
               value={interestRate}
-              onChange={(e) => setInterestRate(parseFloat(e.target.value) || 0)}
+              onChange={setInterestRate}
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
@@ -225,45 +220,39 @@ export default function MortgageCalculator() {
             </select>
           </div>
           <div>
-            <label htmlFor="mg-tax" className="block text-sm font-medium text-text-primary mb-1">
-              Property Tax ($/mo)
-            </label>
-            <input
+            <NumberInput
               id="mg-tax"
-              type="number"
               min={0}
               step={10}
+              label="Property Tax ($/mo)"
+              prefix="$"
               value={propertyTax}
-              onChange={(e) => setPropertyTax(parseFloat(e.target.value) || 0)}
+              onChange={setPropertyTax}
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="mg-ins" className="block text-sm font-medium text-text-primary mb-1">
-              Insurance ($/mo)
-            </label>
-            <input
+            <NumberInput
               id="mg-ins"
-              type="number"
               min={0}
               step={10}
+              label="Insurance ($/mo)"
+              prefix="$"
               value={insurance}
-              onChange={(e) => setInsurance(parseFloat(e.target.value) || 0)}
+              onChange={setInsurance}
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
           </div>
           <div>
-            <label htmlFor="mg-pmi" className="block text-sm font-medium text-text-primary mb-1">
-              PMI (% of loan/year)
-            </label>
-            <input
+            <NumberInput
               id="mg-pmi"
-              type="number"
               min={0}
               max={5}
               step={0.1}
+              label="PMI (% of loan/year)"
+              suffix="%"
               value={pmiPct}
-              onChange={(e) => setPmiPct(parseFloat(e.target.value) || 0)}
+              onChange={setPmiPct}
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
             {downPaymentPct < 20 && (

@@ -6,6 +6,7 @@ import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/compone
 import { formatNumber } from "@/lib/utils";
 import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
+import { NumberInput } from "@/components/NumberInput";
 
 type Tab = "of" | "what-percent" | "change" | "add-subtract";
 
@@ -123,34 +124,26 @@ export default function PercentageCalculator() {
 
         {tab === "of" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-            <div>
-              <label htmlFor="pc-of-pct" className="block text-sm font-medium text-text-primary mb-1">
-                Percentage (%)
-              </label>
-              <input
-                id="pc-of-pct"
-                type="number"
-                min={0}
-                max={10000}
-                step={0.1}
-                value={pctOfValue}
-                onChange={(e) => setPctOfValue(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
-            <div>
-              <label htmlFor="pc-of-y" className="block text-sm font-medium text-text-primary mb-1">
-                Of Value ($)
-              </label>
-              <input
-                id="pc-of-y"
-                type="number"
-                step={1}
-                value={pctOfY}
-                onChange={(e) => setPctOfY(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
+            <NumberInput
+              id="pc-of-pct"
+              label="Percentage (%)"
+              value={pctOfValue}
+              onChange={setPctOfValue}
+              min={0}
+              max={10000}
+              step={0.1}
+              suffix="%"
+              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+            />
+            <NumberInput
+              id="pc-of-y"
+              label="Of Value ($)"
+              value={pctOfY}
+              onChange={setPctOfY}
+              step={1}
+              prefix="$"
+              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+            />
             <div className="sm:col-span-2 rounded-lg bg-surface border border-border p-4">
               <p className="text-sm text-text-secondary">Result</p>
               <p className="text-2xl font-bold text-navy">{money(ofResult)}</p>
@@ -160,32 +153,22 @@ export default function PercentageCalculator() {
 
         {tab === "what-percent" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-            <div>
-              <label htmlFor="pc-wp-x" className="block text-sm font-medium text-text-primary mb-1">
-                Value X
-              </label>
-              <input
-                id="pc-wp-x"
-                type="number"
-                step={1}
-                value={whatX}
-                onChange={(e) => setWhatX(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
-            <div>
-              <label htmlFor="pc-wp-y" className="block text-sm font-medium text-text-primary mb-1">
-                Value Y
-              </label>
-              <input
-                id="pc-wp-y"
-                type="number"
-                step={1}
-                value={whatY}
-                onChange={(e) => setWhatY(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
+            <NumberInput
+              id="pc-wp-x"
+              label="Value X"
+              value={whatX}
+              onChange={setWhatX}
+              step={1}
+              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+            />
+            <NumberInput
+              id="pc-wp-y"
+              label="Value Y"
+              value={whatY}
+              onChange={setWhatY}
+              step={1}
+              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+            />
             <div className="sm:col-span-2 rounded-lg bg-surface border border-border p-4">
               <p className="text-sm text-text-secondary">X is what % of Y?</p>
               <p className="text-2xl font-bold text-navy">{formatNumber(whatPercentResult)}%</p>
@@ -195,32 +178,22 @@ export default function PercentageCalculator() {
 
         {tab === "change" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-            <div>
-              <label htmlFor="pc-ch-old" className="block text-sm font-medium text-text-primary mb-1">
-                Old Value
-              </label>
-              <input
-                id="pc-ch-old"
-                type="number"
-                step={1}
-                value={changeOld}
-                onChange={(e) => setChangeOld(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
-            <div>
-              <label htmlFor="pc-ch-new" className="block text-sm font-medium text-text-primary mb-1">
-                New Value
-              </label>
-              <input
-                id="pc-ch-new"
-                type="number"
-                step={1}
-                value={changeNew}
-                onChange={(e) => setChangeNew(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
+            <NumberInput
+              id="pc-ch-old"
+              label="Old Value"
+              value={changeOld}
+              onChange={setChangeOld}
+              step={1}
+              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+            />
+            <NumberInput
+              id="pc-ch-new"
+              label="New Value"
+              value={changeNew}
+              onChange={setChangeNew}
+              step={1}
+              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+            />
             <div className="sm:col-span-2 rounded-lg bg-surface border border-border p-4">
               <p className="text-sm text-text-secondary">Percentage Change</p>
               <p className="text-2xl font-bold text-navy">
@@ -238,34 +211,25 @@ export default function PercentageCalculator() {
 
         {tab === "add-subtract" && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-            <div>
-              <label htmlFor="pc-as-value" className="block text-sm font-medium text-text-primary mb-1">
-                Value
-              </label>
-              <input
-                id="pc-as-value"
-                type="number"
-                step={1}
-                value={addSubValue}
-                onChange={(e) => setAddSubValue(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
-            <div>
-              <label htmlFor="pc-as-pct" className="block text-sm font-medium text-text-primary mb-1">
-                Percentage (%)
-              </label>
-              <input
-                id="pc-as-pct"
-                type="number"
-                min={0}
-                max={10000}
-                step={0.1}
-                value={addSubPct}
-                onChange={(e) => setAddSubPct(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
+            <NumberInput
+              id="pc-as-value"
+              label="Value"
+              value={addSubValue}
+              onChange={setAddSubValue}
+              step={1}
+              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+            />
+            <NumberInput
+              id="pc-as-pct"
+              label="Percentage (%)"
+              value={addSubPct}
+              onChange={setAddSubPct}
+              min={0}
+              max={10000}
+              step={0.1}
+              suffix="%"
+              className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+            />
             <div>
               <label htmlFor="pc-as-op" className="block text-sm font-medium text-text-primary mb-1">
                 Operation

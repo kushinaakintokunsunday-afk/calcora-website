@@ -5,6 +5,7 @@ import { CalculatorShell } from "@/components/CalculatorShell";
 import { WebApplicationSchema, FAQSchema, BreadcrumbListSchema } from "@/components/Schema";
 import { useMoney } from "@/lib/useCountry";
 import { AdSlot } from "@/components/AdSlot";
+import { NumberInput } from "@/components/NumberInput";
 
 type Mode = "max-loan" | "monthly-payment";
 
@@ -137,66 +138,49 @@ export default function LoanAffordabilityCalculator() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           {mode === "max-loan" ? (
-            <div>
-              <label htmlFor="la-monthly-payment" className="block text-sm font-medium text-text-primary mb-1">
-                Max Monthly Payment ($)
-              </label>
-              <input
-                id="la-monthly-payment"
-                type="number"
-                min={0}
-                step={50}
-                value={monthlyPayment}
-                onChange={(e) => setMonthlyPayment(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
-          ) : (
-            <div>
-              <label htmlFor="la-loan-amount" className="block text-sm font-medium text-text-primary mb-1">
-                Loan Amount ($)
-              </label>
-              <input
-                id="la-loan-amount"
-                type="number"
-                min={0}
-                step={1000}
-                value={loanAmount}
-                onChange={(e) => setLoanAmount(parseFloat(e.target.value) || 0)}
-                className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
-              />
-            </div>
-          )}
-          <div>
-            <label htmlFor="la-rate" className="block text-sm font-medium text-text-primary mb-1">
-              Interest Rate (%)
-            </label>
-            <input
-              id="la-rate"
-              type="number"
+            <NumberInput
+              id="la-monthly-payment"
+              label="Max Monthly Payment ($)"
+              value={monthlyPayment}
+              onChange={setMonthlyPayment}
               min={0}
-              max={100}
-              step={0.1}
-              value={rate}
-              onChange={(e) => setRate(parseFloat(e.target.value) || 0)}
+              step={50}
+              prefix="$"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
-          </div>
-          <div>
-            <label htmlFor="la-years" className="block text-sm font-medium text-text-primary mb-1">
-              Loan Term (years)
-            </label>
-            <input
-              id="la-years"
-              type="number"
-              min={1}
-              max={50}
-              step={1}
-              value={years}
-              onChange={(e) => setYears(parseInt(e.target.value) || 1)}
+          ) : (
+            <NumberInput
+              id="la-loan-amount"
+              label="Loan Amount ($)"
+              value={loanAmount}
+              onChange={setLoanAmount}
+              min={0}
+              step={1000}
+              prefix="$"
               className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
             />
-          </div>
+          )}
+          <NumberInput
+            id="la-rate"
+            label="Interest Rate (%)"
+            value={rate}
+            onChange={setRate}
+            min={0}
+            max={100}
+            step={0.1}
+            suffix="%"
+            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+          />
+          <NumberInput
+            id="la-years"
+            label="Loan Term (years)"
+            value={years}
+            onChange={setYears}
+            min={1}
+            max={50}
+            step={1}
+            className="w-full rounded-lg border border-border bg-white px-4 py-2.5 text-text-primary focus:border-green focus:ring-1 focus:ring-green"
+          />
         </div>
 
         <div className="rounded-lg bg-surface border border-border p-6 mb-6">
