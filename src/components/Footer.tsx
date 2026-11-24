@@ -8,6 +8,7 @@ const FOOTER_TOOLS = CALCULATORS.map((calc) => ({
 
 const FOOTER_PAGES = [
   { href: "/about/", label: "About" },
+  { href: "/methodology/", label: "Methodology" },
   { href: "/contact/", label: "Contact" },
   { href: "/privacy-policy/", label: "Privacy Policy" },
   { href: "/terms/", label: "Terms of Service" },
@@ -72,7 +73,11 @@ export function Footer() {
 
         <div className="mt-10 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs">
-            &copy; {new Date().getFullYear()} Calcora. All rights reserved.
+            &copy; {new Date().getFullYear()} Calcora. All rights reserved. ·
+            Founder:{" "}
+            <Link href="/about/" className="hover:text-white">
+              Akintokun Sunday Kushina
+            </Link>
           </p>
           <p className="text-xs text-center sm:text-right max-w-lg">
             Results are estimates only and should not be considered financial or medical advice.

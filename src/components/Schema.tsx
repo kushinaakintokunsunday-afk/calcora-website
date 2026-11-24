@@ -27,6 +27,29 @@ export function WebSiteSchema() {
   );
 }
 
+export function PersonSchema() {
+  return (
+    <JsonLdScript
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Akintokun Sunday Kushina",
+        url: "https://calcora.website/about",
+        jobTitle: "Customer Relationship Manager",
+        worksFor: {
+          "@type": "Organization",
+          name: "NSIA Bank Benin",
+        },
+        affiliation: {
+          "@type": "Organization",
+          name: "Calcora",
+          url: "https://calcora.website",
+        },
+      }}
+    />
+  );
+}
+
 export function WebApplicationSchema({
   name,
   url,

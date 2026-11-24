@@ -11,8 +11,8 @@ export default function PrivacyPolicyPage() {
     <>
       <BreadcrumbListSchema
         items={[
-          { name: "Home", url: "https://calcora.com" },
-          { name: "Privacy Policy", url: "https://calcora.com/privacy-policy" },
+          { name: "Home", url: "https://calcora.website" },
+          { name: "Privacy Policy", url: "https://calcora.website/privacy-policy" },
         ]}
       />
 
@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
           Privacy Policy
         </h1>
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-          Last updated: September 2025
+          Last updated: 24 November 2026
         </p>
 
         <div className="prose prose-gray dark:prose-invert mt-8 max-w-none space-y-8">
@@ -216,10 +216,10 @@ export default function PrivacyPolicyPage() {
             <p className="mt-3 text-gray-600 dark:text-gray-300">
               If you have questions or concerns about this Privacy Policy, please reach out to us at{" "}
               <a
-                href="mailto:privacy@calcora.com"
+                href="mailto:kushinaakintokunsunday@gmail.com"
                 className="text-blue-600 underline hover:text-blue-500 dark:text-blue-400"
               >
-                privacy@calcora.com
+                kushinaakintokunsunday@gmail.com
               </a>.
             </p>
           </section>

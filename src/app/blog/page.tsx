@@ -62,6 +62,10 @@ export default function BlogPage() {
                   day: "numeric",
                 })}
               </time>
+              <p className="mt-1 text-xs text-text-muted">
+                By <Link href="/about/" className="underline">Akintokun Sunday Kushina</Link>
+                {" · "}Reviewed <time dateTime="2026-11-24">24 November 2026</time>
+              </p>
               <h2 className="mt-2 text-xl font-semibold text-[#1E3A5F]">
                 <Link
                   href={`/blog/${post.slug}/`}

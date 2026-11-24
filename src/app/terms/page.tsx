@@ -11,8 +11,8 @@ export default function TermsOfServicePage() {
     <>
       <BreadcrumbListSchema
         items={[
-          { name: "Home", url: "https://calcora.com" },
-          { name: "Terms of Service", url: "https://calcora.com/terms" },
+          { name: "Home", url: "https://calcora.website" },
+          { name: "Terms of Service", url: "https://calcora.website/terms" },
         ]}
       />
 
@@ -21,7 +21,7 @@ export default function TermsOfServicePage() {
           Terms of Service
         </h1>
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-          Last updated: September 2025
+          Last updated: 24 November 2026
         </p>
 
         <div className="prose prose-gray dark:prose-invert mt-8 max-w-none space-y-8">
@@ -134,10 +134,10 @@ export default function TermsOfServicePage() {
             <p className="mt-3 text-gray-600 dark:text-gray-300">
               If you have any questions about these Terms of Service, please contact us at{" "}
               <a
-                href="mailto:contact@calcora.com"
+                href="mailto:kushinaakintokunsunday@gmail.com"
                 className="text-blue-600 underline hover:text-blue-500 dark:text-blue-400"
               >
-                contact@calcora.com
+                kushinaakintokunsunday@gmail.com
               </a>.
             </p>
           </section>

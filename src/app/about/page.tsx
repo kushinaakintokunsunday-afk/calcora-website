@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { BreadcrumbListSchema } from "@/components/Schema";
+import { BreadcrumbListSchema, PersonSchema } from "@/components/Schema";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About Calcora - Meet the Author",
   description:
-    "Learn about Calcora - our mission to provide free, accurate online calculators.",
+    "Meet Akintokun Sunday Kushina, former Customer Relationship Manager at NSIA Bank Benin, and learn how Calcora's calculators are written and reviewed.",
 };
 
 const breadcrumbs = [
@@ -17,6 +17,7 @@ export default function AboutPage() {
   return (
     <>
       <BreadcrumbListSchema items={breadcrumbs} />
+      <PersonSchema />
 
       <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         <nav className="mb-8 text-sm text-text-secondary" aria-label="Breadcrumb">
@@ -40,6 +41,11 @@ export default function AboutPage() {
           <p className="mt-4 text-lg text-text-secondary">
             Empowering you to make informed financial decisions — one calculation
             at a time.
+          </p>
+          <p className="mt-3 text-sm text-text-muted">
+            By <strong className="text-text-primary">Akintokun Sunday Kushina</strong>,
+            former Customer Relationship Manager at NSIA Bank Benin (2012–2026) ·
+            Last reviewed <time dateTime="2026-11-24">24 November 2026</time>
           </p>
         </header>
 
@@ -125,17 +131,31 @@ export default function AboutPage() {
 
           <div>
             <h2 className="mb-3 text-2xl font-semibold text-[#1E3A5F]">
-              Our Team
+              Who builds Calcora
             </h2>
             <p className="leading-relaxed text-text-secondary">
-              Calcora is built by a small team of finance and technology
-              enthusiasts who share a common goal: making complex calculations
-              simple and accessible. We combine backgrounds in financial planning,
-              software engineering, and data analysis to create tools that are
-              both accurate and easy to use. We&apos;re passionate about the
-              intersection of technology and personal finance, and we&apos;re
-              constantly working to add new calculators and improve existing ones
-              based on user feedback.
+              Calcora is built and maintained by me, <strong className="text-text-primary">Akintokun Sunday Kushina</strong>,
+              a former Customer Relationship Manager at NSIA Bank Benin (2012–2026). My work in
+              banking involved accounts, loan documentation and checking figures — so I built
+              Calcora to give people the same clarity I tried to give customers: not just a
+              number, but the formula, a worked example and the assumptions behind it.
+            </p>
+            <p className="mt-3 leading-relaxed text-text-secondary">
+              Every calculator is written, tested and reviewed by me before it goes live.
+              For rates, tax brackets and limits I use published sources — IRS, FDIC, CFPB and
+              Federal Reserve guidance — and I link those sources on the relevant pages.
+              If you find an error, email me and I will correct it and note the date.
+            </p>
+            <p className="mt-3 text-sm text-text-secondary">
+              <strong className="text-text-primary">Contact:</strong>{" "}
+              <a className="underline" href="mailto:kushinaakintokunsunday@gmail.com">
+                kushinaakintokunsunday@gmail.com
+              </a>{" "}
+              · <strong className="text-text-primary">How we calculate:</strong>{" "}
+              <Link className="underline" href="/methodology/">our methodology</Link>
+            </p>
+            <p className="mt-3 text-xs text-text-muted">
+              The views and calculations on Calcora are my own and do not represent NSIA Bank Benin.
             </p>
           </div>
         </section>

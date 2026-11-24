@@ -6,6 +6,7 @@ const BASE_URL = "https://calcora.website";
 
 const PAGES = [
   { path: "/about/", lastModified: new Date() },
+  { path: "/methodology/", lastModified: new Date() },
   { path: "/contact/", lastModified: new Date() },
   { path: "/privacy-policy/", lastModified: new Date() },
   { path: "/terms/", lastModified: new Date() },
