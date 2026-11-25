@@ -39,6 +39,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://calcora.website",
   },
+  verification: {
+    other: {
+      "fo-verify": "353b8227-5f79-4c12-9cc7-b5e300a32fe3",
+    },
+  },
 };
 
 export const viewport: Viewport = {
